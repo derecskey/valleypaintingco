@@ -33,7 +33,7 @@ public/       # Static files copied as-is (CNAME, robots.txt, etc.)
 
 ## Key Pages
 
-Home · Services (Interior, Exterior, Additional, Index) · About · Service Areas · Testimonials · Contact/Estimate · Privacy Policy · Accessibility Statement · 404
+Current planned pages include, but are not limited to: Home · Services (Interior, Exterior, Additional, Index) · About · Service Areas · Testimonials · Contact/Estimate · Privacy Policy · Accessibility Statement · 404. Refer to `src/pages/` for the authoritative route list as the project evolves.
 
 ## Conventions
 
