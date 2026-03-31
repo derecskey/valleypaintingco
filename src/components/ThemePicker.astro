@@ -1,0 +1,315 @@
+---
+// ThemePicker.astro
+// Palette-icon button that opens a dropdown to switch between the three site
+// themes (Blue / Light / Dark).  The chosen theme is persisted to localStorage
+// and applied by the anti-FOUC inline script in BaseLayout.astro.
+---
+
+<div class="theme-picker" id="theme-picker">
+  <button
+    class="theme-picker-btn"
+    id="theme-picker-btn"
+    type="button"
+    aria-label="Change color theme"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-controls="theme-picker-menu"
+  >
+    <!-- MDI Palette icon -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      width="22"
+      height="22"
+      fill="currentColor"
+    >
+      <path d="M12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2C17.5,2 22,6 22,11A6,6 0 0,1 16,17H14.2C13.9,17 13.7,17.2 13.7,17.5C13.7,17.6 13.8,17.7 13.8,17.8C14.3,18.3 14.6,19 14.6,19.7C14.6,21 13.5,22 12,22M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C12.3,20 12.5,19.8 12.5,19.5C12.5,19.3 12.4,19.2 12.4,19.1C11.9,18.6 11.6,17.9 11.6,17.2C11.6,15.9 12.7,14.9 14.2,14.9H16A4,4 0 0,0 20,11C20,7.1 16.4,4 12,4M6.5,10C7.3,10 8,10.7 8,11.5C8,12.3 7.3,13 6.5,13C5.7,13 5,12.3 5,11.5C5,10.7 5.7,10 6.5,10M9.5,6C10.3,6 11,6.7 11,7.5C11,8.3 10.3,9 9.5,9C8.7,9 8,8.3 8,7.5C8,6.7 8.7,6 9.5,6M14.5,6C15.3,6 16,6.7 16,7.5C16,8.3 15.3,9 14.5,9C13.7,9 13,8.3 13,7.5C13,6.7 13.7,6 14.5,6M17.5,10C18.3,10 19,10.7 19,11.5C19,12.3 18.3,13 17.5,13C16.7,13 16,12.3 16,11.5C16,10.7 16.7,10 17.5,10Z" />
+    </svg>
+  </button>
+
+  <ul
+    class="theme-menu"
+    id="theme-picker-menu"
+    role="listbox"
+    aria-label="Color theme"
+    hidden
+  >
+    <li class="theme-option" role="option" data-theme="" tabindex="-1">
+      <span class="swatch swatch--blue" aria-hidden="true"></span>
+      <span class="theme-label">Blue</span>
+      <span class="check-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+        </svg>
+      </span>
+    </li>
+    <li class="theme-option" role="option" data-theme="light" tabindex="-1">
+      <span class="swatch swatch--light" aria-hidden="true"></span>
+      <span class="theme-label">Light</span>
+      <span class="check-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+        </svg>
+      </span>
+    </li>
+    <li class="theme-option" role="option" data-theme="dark" tabindex="-1">
+      <span class="swatch swatch--dark" aria-hidden="true"></span>
+      <span class="theme-label">Dark</span>
+      <span class="check-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+        </svg>
+      </span>
+    </li>
+  </ul>
+</div>
+
+<script>
+  (() => {
+    const STORAGE_KEY = "vp-theme";
+
+    const picker = document.getElementById("theme-picker");
+    const btn = document.getElementById(
+      "theme-picker-btn"
+    ) as HTMLButtonElement | null;
+    const menu = document.getElementById(
+      "theme-picker-menu"
+    ) as HTMLElement | null;
+
+    if (!picker || !btn || !menu) return;
+
+    const options = Array.from(
+      menu.querySelectorAll<HTMLElement>(".theme-option")
+    );
+
+    function getActiveTheme(): string {
+      return document.documentElement.getAttribute("data-theme") ?? "";
+    }
+
+    function applyTheme(value: string) {
+      if (value === "") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        document.documentElement.setAttribute("data-theme", value);
+      }
+      try {
+        if (value === "") {
+          localStorage.removeItem(STORAGE_KEY);
+        } else {
+          localStorage.setItem(STORAGE_KEY, value);
+        }
+      } catch (_) {
+        // localStorage may be unavailable (e.g. private browsing restrictions)
+      }
+      updateActiveOption(value);
+    }
+
+    function updateActiveOption(activeTheme: string) {
+      options.forEach((opt) => {
+        const isActive = (opt.dataset.theme ?? "") === activeTheme;
+        opt.setAttribute("aria-selected", String(isActive));
+        opt.classList.toggle("is-active", isActive);
+      });
+    }
+
+    function openMenu() {
+      menu.removeAttribute("hidden");
+      btn.setAttribute("aria-expanded", "true");
+      const active = menu.querySelector<HTMLElement>(".theme-option.is-active");
+      (active ?? options[0])?.focus();
+    }
+
+    function closeMenu(returnFocus = true) {
+      menu.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", "false");
+      if (returnFocus) btn.focus();
+    }
+
+    function toggleMenu() {
+      if (menu.hasAttribute("hidden")) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    }
+
+    // Initialise active state from current <html data-theme>
+    updateActiveOption(getActiveTheme());
+
+    // Toggle on button click
+    btn.addEventListener("click", toggleMenu);
+
+    // Handle keyboard on the toggle button
+    btn.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !menu.hasAttribute("hidden")) {
+        closeMenu();
+      }
+    });
+
+    // Handle each option
+    options.forEach((opt, i) => {
+      opt.addEventListener("click", () => {
+        applyTheme(opt.dataset.theme ?? "");
+        closeMenu();
+      });
+
+      opt.addEventListener("keydown", (e: KeyboardEvent) => {
+        switch (e.key) {
+          case "Enter":
+          case " ":
+            e.preventDefault();
+            applyTheme(opt.dataset.theme ?? "");
+            closeMenu();
+            break;
+          case "Escape":
+            closeMenu();
+            break;
+          case "ArrowDown":
+            e.preventDefault();
+            options[(i + 1) % options.length]?.focus();
+            break;
+          case "ArrowUp":
+            e.preventDefault();
+            options[(i - 1 + options.length) % options.length]?.focus();
+            break;
+          case "Home":
+            e.preventDefault();
+            options[0]?.focus();
+            break;
+          case "End":
+            e.preventDefault();
+            options[options.length - 1]?.focus();
+            break;
+        }
+      });
+    });
+
+    // Close when clicking outside the picker
+    document.addEventListener("click", (e: MouseEvent) => {
+      if (
+        !menu.hasAttribute("hidden") &&
+        !picker.contains(e.target as Node)
+      ) {
+        closeMenu(false);
+      }
+    });
+  })();
+</script>
+
+<style>
+  /* Wrapper — provides positioning context for the dropdown */
+  .theme-picker {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* Palette icon button — matches the hamburger toggle style */
+  .theme-picker-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    color: var(--color-white);
+    line-height: 1;
+  }
+
+  .theme-picker-btn:hover {
+    background-color: rgb(255 255 255 / 0.12);
+  }
+
+  .theme-picker-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Dropdown menu */
+  .theme-menu {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    z-index: 200;
+    min-width: 10rem;
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) 0;
+    background-color: var(--color-white);
+    color: var(--color-neutral-900);
+    border: 1px solid var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15),
+      0 4px 6px -2px rgb(0 0 0 / 0.08);
+  }
+
+  /* Individual option row */
+  .theme-option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-normal);
+    white-space: nowrap;
+    transition: background-color var(--transition-fast);
+  }
+
+  .theme-option:hover,
+  .theme-option:focus {
+    background-color: var(--color-neutral-100);
+    outline: none;
+  }
+
+  .theme-option:focus-visible {
+    outline: 2px solid var(--color-blue-600);
+    outline-offset: -2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Check icon — visible only on the active option */
+  .check-icon {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    color: var(--color-blue-600);
+    opacity: 0;
+  }
+
+  .theme-option.is-active .check-icon {
+    opacity: 1;
+  }
+
+  .theme-option.is-active {
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Color swatches — fixed representative colors, intentionally not
+     theme-relative so each swatch always shows its own theme's appearance */
+  .swatch {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+    border: 1px solid rgb(0 0 0 / 0.15);
+  }
+
+  .swatch--blue {
+    background-color: var(--color-blue-600);
+  }
+
+  .swatch--light {
+    /* Warm off-white with gold accent — matches the light theme palette */
+    background: linear-gradient(135deg, #f8f6f3 50%, #d9a820 50%);
+  }
+
+  .swatch--dark {
+    /* Deep navy — matches the dark theme background */
+    background-color: #0d1b2a;
+  }
+</style>

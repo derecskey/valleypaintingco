@@ -1,4 +1,6 @@
 ---
+import ThemePicker from "./ThemePicker.astro";
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
@@ -14,17 +16,6 @@ const navLinks = [
       <span class="logo-name">Valley Painting Company</span>
     </a>
 
-    <button
-      class="nav-toggle"
-      aria-controls="primary-nav"
-      aria-expanded="false"
-      aria-label="Toggle navigation menu"
-    >
-      <span class="hamburger-bar"></span>
-      <span class="hamburger-bar"></span>
-      <span class="hamburger-bar"></span>
-    </button>
-
     <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
       <ul class="nav-list">
         {navLinks.map((link) => (
@@ -35,6 +26,20 @@ const navLinks = [
         </li>
       </ul>
     </nav>
+
+    <div class="header-controls">
+      <ThemePicker />
+      <button
+        class="nav-toggle"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation menu"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -107,6 +112,14 @@ const navLinks = [
   .logo:hover .logo-name,
   .logo:focus-visible .logo-name {
     color: var(--color-blue-100);
+  }
+
+  /* Controls area: theme picker + hamburger toggle */
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    flex-shrink: 0;
   }
 
   /* Hamburger toggle button */
