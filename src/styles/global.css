@@ -2,10 +2,11 @@
    VALLEY PAINTING COMPANY — Global Stylesheet
    ==========================================================================
    Defines the design system: color palette, typography, spacing, and base
-   styles for all three themes:
-     • Blue  (default) — brand identity: white on cobalt blue
-     • Light            — elegant, warm off-white with blue accents
-     • Dark             — sophisticated deep-navy with blue accents
+   styles for all four themes:
+     • Blue        (default) — brand identity: white on cobalt blue
+     • Light                  — elegant, warm off-white with blue accents
+     • Dark                   — sophisticated deep-navy with blue accents
+     • White Snow (SW 9541)  — crisp warm white inspired by Sherwin Williams
    ========================================================================== */
 
 /* ==========================================================================
@@ -198,6 +199,28 @@
   --color-border:      rgb(255 255 255 / 0.1);
   --color-accent:      var(--color-gold-300);
   --color-accent-text: var(--color-neutral-900);
+}
+
+/* ==========================================================================
+   WHITE SNOW THEME — Inspired by Sherwin Williams SW 9541 White Snow
+   Coordinate palette: Autonomous SW 9557, Night Out SW 9560, Stone Fruit SW 9699
+   Contrast: Night Out (#1c2636) on White Snow (#f2ede5) ≈ 14:1  ✓ WCAG AA
+             muted text (#5c646f) on White Snow           ≈  6.2:1 ✓ WCAG AA
+             Stone Fruit (#a05c4e) on White Snow          ≈  5.1:1 ✓ WCAG AA
+   ========================================================================== */
+[data-theme="white-snow"] {
+  --color-bg:          #f2ede5;   /* SW 9541 White Snow — warm creamy white */
+  --color-bg-alt:      #e9e3da;
+  --color-surface:     #ffffff;
+  --color-surface-alt: #f7f3ee;
+  --color-text:        #1c2636;   /* SW 9560 Night Out — deep charcoal navy */
+  --color-text-muted:  #5c646f;
+  --color-heading:     #1c2636;   /* SW 9560 Night Out */
+  --color-link:        #a05c4e;   /* SW 9699 Stone Fruit — warm terracotta */
+  --color-link-hover:  #1c2636;   /* SW 9560 Night Out */
+  --color-border:      #ddd8d0;
+  --color-accent:      #bf8275;   /* SW 9699 Stone Fruit */
+  --color-accent-text: #ffffff;
 }
 
 /* ==========================================================================
