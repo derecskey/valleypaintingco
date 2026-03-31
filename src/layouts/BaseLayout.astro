@@ -8,7 +8,7 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
-  theme?: "blue" | "light" | "dark" | "white-snow";
+  theme?: "blue" | "light" | "dark" | "white-snow" | "rain-cloud";
 }
 
 const {
@@ -30,7 +30,7 @@ const {
       (function () {
         try {
           var t = localStorage.getItem("vp-theme");
-          if (t === "light" || t === "dark" || t === "white-snow") {
+          if (t === "light" || t === "dark" || t === "white-snow" || t === "rain-cloud") {
             document.documentElement.setAttribute("data-theme", t);
           }
         } catch (_) {}
