@@ -29,7 +29,7 @@ try {
     .filter((f) => /\.(jpe?g|png|webp|avif)$/i.test(f))
     .sort() // deterministic order for consistent SSR output
     .map((f) => ({
-      src: `/images/hero/${f}`,
+      src: `${import.meta.env.BASE_URL}images/hero/${f}`,
       alt: altFromFilename(f),
     }));
 } catch {
@@ -68,7 +68,7 @@ const heroImagesJson = JSON.stringify(heroImages);
       >
         Call Now
       </a>
-      <a href="/estimate" class="hero-btn hero-btn-secondary">
+      <a href={`${import.meta.env.BASE_URL}estimate`} class="hero-btn hero-btn-secondary">
         Request an Estimate
       </a>
     </div>
@@ -90,7 +90,7 @@ const heroImagesJson = JSON.stringify(heroImages);
         ))
       }
     </div>
-    <a href="/testimonials" class="hero-reviews-link">
+    <a href={`${import.meta.env.BASE_URL}testimonials`} class="hero-reviews-link">
       See More Reviews
     </a>
   </div>

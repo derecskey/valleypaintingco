@@ -3,18 +3,19 @@ import { Image } from "astro:assets";
 import logoSrc from "../assets/logos/vpc-logo-white.png";
 import ThemePicker from "./ThemePicker.astro";
 
+const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
-  { href: "/service-areas", label: "Service Areas" },
-  { href: "/testimonials", label: "Testimonials" },
+  { href: base, label: "Home" },
+  { href: `${base}services`, label: "Services" },
+  { href: `${base}about`, label: "About" },
+  { href: `${base}service-areas`, label: "Service Areas" },
+  { href: `${base}testimonials`, label: "Testimonials" },
 ];
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="logo" aria-label="Valley Painting Company — Home">
+    <a href={import.meta.env.BASE_URL} class="logo" aria-label="Valley Painting Company — Home">
       <Image
         src={logoSrc}
         alt="Valley Painting Company"
@@ -30,7 +31,7 @@ const navLinks = [
           <li><a href={link.href}>{link.label}</a></li>
         ))}
         <li>
-          <a href="/estimate" class="nav-cta">Request an Estimate</a>
+          <a href={`${import.meta.env.BASE_URL}estimate`} class="nav-cta">Request an Estimate</a>
         </li>
       </ul>
     </nav>
