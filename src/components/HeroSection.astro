@@ -1,6 +1,8 @@
 ---
 import fs from "node:fs";
 import path from "node:path";
+import Testimonial from "./Testimonial.astro";
+import testimonials from "../content/testimonials.json";
 
 interface HeroImage {
   src: string;
@@ -71,6 +73,27 @@ const heroImagesJson = JSON.stringify(heroImages);
       </a>
     </div>
   </div>
+
+  <!-- Rotating testimonials strip -->
+  <div class="hero-testimonials">
+    <div class="hero-testimonial-track">
+      {
+        testimonials.map((t) => (
+          <div class="hero-testimonial-slide" aria-hidden="true">
+            <Testimonial
+              quote={t.quote}
+              attribution={t.attribution}
+              detail={t.detail}
+              variant="hero"
+            />
+          </div>
+        ))
+      }
+    </div>
+    <a href="/testimonials" class="hero-reviews-link">
+      See More Reviews
+    </a>
+  </div>
 </section>
 
 {
@@ -103,13 +126,79 @@ const heroImagesJson = JSON.stringify(heroImages);
   )
 }
 
+<script>
+  /* ---- Testimonial rotation ---- */
+  (() => {
+    const container = document.querySelector(".hero-testimonials");
+    const slides = container
+      ? [...container.querySelectorAll(".hero-testimonial-slide")]
+      : [];
+    if (slides.length === 0) return;
+
+    let current = Math.floor(Math.random() * slides.length);
+    let intervalId;
+    let isHovered = false;
+    let isFocused = false;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function showSlide(idx) {
+      slides.forEach((slide, i) => {
+        const active = i === idx;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", active ? "false" : "true");
+      });
+      current = idx;
+    }
+
+    function advance() {
+      showSlide((current + 1) % slides.length);
+    }
+
+    // (Re)start the interval only when no pause condition is active
+    function startRotation() {
+      clearInterval(intervalId);
+      if (!isHovered && !isFocused && !reducedMotion.matches) {
+        intervalId = setInterval(advance, 12000);
+      }
+    }
+
+    // Show a random starting slide then begin rotation
+    showSlide(current);
+    startRotation();
+
+    // Pause on hover — track state so focus events don't cause double-intervals
+    container.addEventListener("mouseenter", () => {
+      isHovered = true;
+      clearInterval(intervalId);
+    });
+    container.addEventListener("mouseleave", () => {
+      isHovered = false;
+      startRotation();
+    });
+
+    // Pause while keyboard focus is inside the strip
+    container.addEventListener("focusin", () => {
+      isFocused = true;
+      clearInterval(intervalId);
+    });
+    container.addEventListener("focusout", () => {
+      isFocused = false;
+      startRotation();
+    });
+
+    // Respect prefers-reduced-motion — re-evaluate whenever it changes
+    reducedMotion.addEventListener("change", () => startRotation());
+  })();
+</script>
+
 <style>
   /* ---- Hero container — 16:9 horizontal banner, max 768px tall ---- */
   .hero {
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
     width: 100%;
     max-height: 768px;
     aspect-ratio: 16 / 9;
@@ -152,13 +241,13 @@ const heroImagesJson = JSON.stringify(heroImages);
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: var(--space-8) var(--space-6);
+    padding: var(--space-8) var(--space-6) var(--space-4);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    flex: 1;
   }
 
   .hero-headline {
@@ -235,6 +324,62 @@ const heroImagesJson = JSON.stringify(heroImages);
     background-color: rgb(255 255 255 / 0.1);
   }
 
+  /* ---- Testimonials strip ---- */
+  .hero-testimonials {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-6);
+    /* Layered transparency — partially occludes the image behind */
+    background: rgb(0 27 52 / 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .hero-testimonial-track {
+    flex: 1;
+    /* Stack all slides in the same grid cell; height is set by tallest slide */
+    display: grid;
+    min-height: 4.5rem;
+  }
+
+  .hero-testimonial-slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+  }
+
+  .hero-testimonial-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hero-reviews-link {
+    flex-shrink: 0;
+    color: var(--color-blue-50);
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+  }
+
+  .hero-reviews-link:hover,
+  .hero-reviews-link:focus-visible {
+    color: var(--color-white);
+  }
+
+  .hero-reviews-link:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
   /* ---- Responsive adjustments ---- */
   @media (max-width: 640px) {
     .hero-content {
@@ -249,6 +394,17 @@ const heroImagesJson = JSON.stringify(heroImages);
     .hero-btn {
       width: 100%;
       max-width: 240px;
+    }
+
+    .hero-testimonials {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .hero-testimonial-track {
+      min-height: 5rem;
     }
   }
 </style>
