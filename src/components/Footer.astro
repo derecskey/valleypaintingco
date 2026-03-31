@@ -1,0 +1,135 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-company">Valley Painting Company</p>
+      <p class="footer-tagline">
+        Chagrin Falls, Ohio &mdash; Established 1984
+      </p>
+    </div>
+
+    <div class="footer-contact">
+      <p class="footer-section-label">Contact</p>
+      <ul class="footer-list">
+        <li>
+          <a href="tel:+14405432840">440.543.2840</a>
+        </li>
+        <li>
+          <a href="mailto:ashley@valleypaintingco.com"
+            >ashley@valleypaintingco.com</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+      <p class="footer-section-label">Follow Us</p>
+      <ul class="footer-list">
+        <li>
+          <a
+            href="https://www.facebook.com/ValleyPaintingCompany/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Valley Painting Company on Facebook (opens in a new tab)"
+          >
+            Facebook
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      &copy; {currentYear} Valley Painting Company. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-blue-900);
+    color: var(--color-blue-100);
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-8);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-6);
+  }
+
+  /* Brand column */
+  .footer-company {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+    max-width: none;
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-tagline {
+    font-size: var(--text-sm);
+    color: var(--color-blue-200);
+    max-width: none;
+  }
+
+  /* Section labels */
+  .footer-section-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-blue-300);
+    margin-bottom: var(--space-3);
+    max-width: none;
+  }
+
+  /* Footer lists */
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-list li + li {
+    margin-top: var(--space-2);
+  }
+
+  .footer-list a {
+    color: var(--color-blue-100);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-list a:hover,
+  .footer-list a:focus-visible {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+    padding: var(--space-4) var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-bottom p {
+    font-size: var(--text-xs);
+    color: var(--color-blue-300);
+    text-align: center;
+    max-width: none;
+  }
+</style>
