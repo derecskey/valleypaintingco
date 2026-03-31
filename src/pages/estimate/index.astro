@@ -1,0 +1,511 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Request a Free Estimate | Valley Painting Company"
+  description="Request a free painting estimate from Valley Painting Company. Serving the Chagrin Valley and Northeast Ohio for residential and commercial painting."
+>
+  <article class="estimate-page">
+
+    <header class="page-header">
+      <h1>Request a Free Estimate</h1>
+      <p class="page-subtitle">
+        Tell us about your project and we'll get back to you within one
+        business day.
+      </p>
+    </header>
+
+    <div class="estimate-layout">
+
+      <!--
+        Form submission: handled entirely client-side via mailto:.
+        JavaScript intercepts the submit event, assembles a formatted email
+        body from the field values, then sets window.location.href to a
+        mailto: URI — which opens the user's native email client pre-filled.
+        After a short delay the browser navigates to /estimate/thank-you.
+
+        No-JS fallback: the form's action="mailto:..." means browsers that
+        support it will open the email client directly when JS is unavailable.
+      -->
+      <section class="form-section" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="visually-hidden">Estimate request form</h2>
+
+        <form
+          id="estimate-form"
+          class="estimate-form"
+          method="POST"
+          action="mailto:ashley@valleypaintingco.com"
+          enctype="text/plain"
+        >
+          <!--
+            Honeypot anti-spam field.
+            Visually hidden and excluded from tab order so real users never
+            interact with it. Bots that auto-fill all fields will populate it,
+            and the client-side submit handler will silently block that request.
+          -->
+          <div class="visually-hidden" aria-hidden="true">
+            <label for="hp-website">Leave this field blank</label>
+            <input
+              type="text"
+              id="hp-website"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form-grid">
+
+            <!-- Name -->
+            <div class="form-field">
+              <label class="form-label" for="name">
+                Full Name
+                <span class="required-mark" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="form-input"
+                type="text"
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-field">
+              <label class="form-label" for="email">
+                Email Address
+                <span class="required-mark" aria-hidden="true">*</span>
+              </label>
+              <input
+                class="form-input"
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div class="form-field">
+              <label class="form-label" for="phone">
+                Phone Number
+                <span class="optional-label">(optional)</span>
+              </label>
+              <input
+                class="form-input"
+                type="tel"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+              />
+            </div>
+
+            <!-- Service Type -->
+            <div class="form-field">
+              <label class="form-label" for="service">
+                Service Type
+                <span class="required-mark" aria-hidden="true">*</span>
+              </label>
+              <div class="select-wrapper">
+                <select
+                  class="form-input form-select"
+                  id="service"
+                  name="service"
+                  required
+                  aria-required="true"
+                >
+                  <option value="" disabled selected>Select a service…</option>
+                  <option value="Interior Painting">Interior Painting</option>
+                  <option value="Exterior Painting">Exterior Painting</option>
+                  <option value="Wallpaper / Wallcovering">Wallpaper / Wallcovering</option>
+                  <option value="Commercial Painting">Commercial Painting</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Project Description -->
+            <div class="form-field form-field--full">
+              <label class="form-label" for="message">
+                Project Description
+                <span class="required-mark" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                class="form-input form-textarea"
+                id="message"
+                name="message"
+                rows="5"
+                required
+                aria-required="true"
+                placeholder="Briefly describe your project — for example, the rooms or areas to be painted, any surface preparation needed, and your preferred timeline."
+              ></textarea>
+            </div>
+
+          </div><!-- /.form-grid -->
+
+          <p class="required-note">
+            <span aria-hidden="true">*</span> Required fields
+          </p>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-button">
+              Send Estimate Request
+            </button>
+          </div>
+
+        </form>
+      </section><!-- /.form-section -->
+
+      <!-- Alternate contact info -->
+      <aside class="contact-aside" aria-labelledby="contact-aside-heading">
+        <h2 id="contact-aside-heading">Prefer to call or email?</h2>
+        <p>We're happy to answer any questions directly.</p>
+        <ul class="contact-list">
+          <li>
+            <a href="tel:+14405432840" class="contact-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l1.84-1.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              440.543.2840
+            </a>
+          </li>
+          <li>
+            <a href="mailto:ashley@valleypaintingco.com" class="contact-link">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              ashley@valleypaintingco.com
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+    </div><!-- /.estimate-layout -->
+
+  </article>
+</BaseLayout>
+
+<script>
+  // Intercept form submission and open the user's native email client with
+  // all fields pre-filled. After the mailto: URI is triggered, the browser
+  // navigates to the thank-you page.
+  const form = document.getElementById("estimate-form") as HTMLFormElement | null;
+  const honeypot = document.getElementById("hp-website") as HTMLInputElement | null;
+
+  if (form && honeypot) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // Honeypot check — bots fill hidden fields; real users never see this.
+      if (honeypot.value.trim() !== "") {
+        return;
+      }
+
+      // Collect field values — guard against unexpected DOM changes.
+      const nameEl    = form.querySelector<HTMLInputElement>("#name");
+      const emailEl   = form.querySelector<HTMLInputElement>("#email");
+      const phoneEl   = form.querySelector<HTMLInputElement>("#phone");
+      const serviceEl = form.querySelector<HTMLSelectElement>("#service");
+      const messageEl = form.querySelector<HTMLTextAreaElement>("#message");
+
+      if (!nameEl || !emailEl || !phoneEl || !serviceEl || !messageEl) {
+        return;
+      }
+
+      const name    = nameEl.value.trim();
+      const email   = emailEl.value.trim();
+      const phone   = phoneEl.value.trim();
+      const service = serviceEl.value;
+      const message = messageEl.value.trim();
+
+      // Build a readable email body.
+      const bodyLines: string[] = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+      ];
+      if (phone) bodyLines.push(`Phone: ${phone}`);
+      bodyLines.push(`Service: ${service}`, "", "Project Description:", message);
+
+      const to      = "ashley@valleypaintingco.com";
+      const subject = encodeURIComponent("New Estimate Request — Valley Painting Company");
+      const body    = encodeURIComponent(bodyLines.join("\n"));
+
+      // Open the email client with the pre-filled message.
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+
+      // Wait briefly so the email client has time to launch before the page
+      // navigates away. 400ms is long enough on most OS/browser combinations
+      // without feeling sluggish to the user.
+      const EMAIL_CLIENT_LAUNCH_DELAY = 400;
+      setTimeout(() => {
+        window.location.href = "/estimate/thank-you";
+      }, EMAIL_CLIENT_LAUNCH_DELAY);
+    });
+  }
+</script>
+
+<style>
+  /* ── Page wrapper ──────────────────────────────────────────────────────── */
+  .estimate-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-6);
+  }
+
+  /* ── Page header ───────────────────────────────────────────────────────── */
+  .page-header {
+    margin-bottom: var(--space-10);
+  }
+
+  .page-subtitle {
+    margin-top: var(--space-4);
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+  }
+
+  /* ── Two-column layout (form + aside) ──────────────────────────────────── */
+  .estimate-layout {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  /* ── Form grid ─────────────────────────────────────────────────────────── */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  /* Project description textarea spans both columns */
+  .form-field--full {
+    grid-column: 1 / -1;
+  }
+
+  /* ── Labels ────────────────────────────────────────────────────────────── */
+  .form-label {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+  }
+
+  .required-mark {
+    color: var(--color-accent);
+  }
+
+  .optional-label {
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
+
+  /* ── Inputs ────────────────────────────────────────────────────────────── */
+  .form-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .form-input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 0;
+    border-color: var(--color-accent);
+  }
+
+  /* ── Select wrapper + custom arrow ────────────────────────────────────── */
+  .select-wrapper {
+    position: relative;
+  }
+
+  .select-wrapper::after {
+    content: "";
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-text);
+    pointer-events: none;
+    /* Chevron-down icon as a CSS mask */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: var(--space-10);
+    cursor: pointer;
+  }
+
+  /* ── Textarea ──────────────────────────────────────────────────────────── */
+  .form-textarea {
+    resize: vertical;
+    min-height: 130px;
+  }
+
+  /* ── Required note ─────────────────────────────────────────────────────── */
+  .required-note {
+    margin-top: var(--space-4);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    max-width: none;
+  }
+
+  /* ── Submit button ─────────────────────────────────────────────────────── */
+  .form-actions {
+    margin-top: var(--space-8);
+  }
+
+  .submit-button {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-wide);
+    padding: var(--space-4) var(--space-8);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+  }
+
+  .submit-button:hover,
+  .submit-button:focus-visible {
+    opacity: 0.9;
+  }
+
+  /* ── Contact aside ─────────────────────────────────────────────────────── */
+  .contact-aside {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    border-left: 4px solid var(--color-accent);
+    padding: var(--space-8);
+  }
+
+  .contact-aside h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .contact-aside > p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    max-width: none;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .contact-list li + li {
+    margin-top: 0;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+  }
+
+  .contact-link:hover,
+  .contact-link:focus-visible {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* ── Responsive ────────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .estimate-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-aside {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-field--full {
+      grid-column: 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .estimate-page {
+      padding: var(--space-8) var(--space-4);
+    }
+  }
+</style>
