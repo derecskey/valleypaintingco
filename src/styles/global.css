@@ -146,6 +146,11 @@
   --color-border:      rgb(255 255 255 / 0.2);
   --color-accent:      var(--color-gold-400);
   --color-accent-text: var(--color-neutral-900);
+
+  /* Header / footer / mobile-nav background colors */
+  --color-header-bg:   var(--color-blue-800);
+  --color-footer-bg:   var(--color-blue-900);
+  --color-nav-bg:      var(--color-blue-900);
 }
 
 /* ==========================================================================
@@ -167,6 +172,11 @@
   --color-border:      var(--color-neutral-200);
   --color-accent:      var(--color-gold-500);
   --color-accent-text: var(--color-white);
+
+  /* Header / footer / mobile-nav use cobalt blue in Light Mode */
+  --color-header-bg:   var(--color-blue-600);
+  --color-footer-bg:   var(--color-blue-600);
+  --color-nav-bg:      var(--color-blue-700);
 }
 
 /* ==========================================================================
