@@ -39,29 +39,34 @@ const navLinks = [
 </header>
 
 <script>
-  const toggle = document.querySelector(".nav-toggle");
-  const nav = document.getElementById("primary-nav");
+  (() => {
+    const header = document.querySelector<HTMLElement>(".site-header");
+    const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+    const nav = document.getElementById("primary-nav");
 
-  if (!toggle || !nav) {
-    // Required elements are missing; safely abort script.
-    // This avoids runtime errors if the header markup changes.
-    // eslint-disable-next-line no-useless-return
-    return;
-  }
+    if (!header || !toggle || !nav) {
+      return;
+    }
 
-  toggle.addEventListener("click", () => {
-    const expanded = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!expanded));
-    nav.classList.toggle("is-open", !expanded);
-  });
+    // Progressive enhancement: mark header so CSS can hide nav and show toggle.
+    // Without this class (no JS), the nav remains fully visible on all screen
+    // sizes and the hamburger button stays hidden — ensuring a usable no-JS state.
+    header.classList.add("js-enabled");
 
-  // Close nav when a link is clicked (on mobile, after navigating)
-  nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      toggle.setAttribute("aria-expanded", "false");
-      nav.classList.remove("is-open");
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      nav.classList.toggle("is-open", !expanded);
     });
-  });
+
+    // Close nav when a link is clicked (on mobile, after navigating)
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        toggle.setAttribute("aria-expanded", "false");
+        nav.classList.remove("is-open");
+      });
+    });
+  })();
 </script>
 
 <style>
@@ -201,11 +206,12 @@ const navLinks = [
 
   /* Mobile styles */
   @media (max-width: 767px) {
-    .nav-toggle {
+    /* JS-enhanced: show hamburger button and collapse nav by default */
+    .js-enabled .nav-toggle {
       display: flex;
     }
 
-    .primary-nav {
+    .js-enabled .primary-nav {
       display: none;
       position: absolute;
       top: 100%;
@@ -216,8 +222,19 @@ const navLinks = [
       box-shadow: var(--shadow-lg);
     }
 
-    .primary-nav.is-open {
+    .js-enabled .primary-nav.is-open {
       display: block;
+    }
+
+    /* No-JS fallback: nav is always visible, stacked vertically */
+    .primary-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--color-blue-900);
+      border-top: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
     .nav-list {
