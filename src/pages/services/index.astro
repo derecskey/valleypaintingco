@@ -1,0 +1,212 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
+
+const services = [
+  {
+    title: "Interior Painting",
+    description:
+      "From fine hand-brushed woodwork to full room repaints, we bring craftsmanship and attention to detail to every interior project.",
+    features: [
+      "HVLP fine finishes",
+      "Fine hand brushed woodwork finishes",
+      "Brush & roll work",
+      "Textures, glazes & washes",
+      "Distressed finishes",
+      "Plaster & drywall repair",
+      "Complete wallpaper hanging & removal",
+      "New construction & repaints",
+      "Airless & conventional spray",
+    ],
+    href: "/services/interior",
+  },
+  {
+    title: "Exterior Painting",
+    description:
+      "We tackle any exterior job — from single-story residences to high-reach commercial buildings — with the equipment and expertise to do it right.",
+    features: [
+      "High-reach lift work (40′ man lift)",
+      "Ladders, picks & scaffold work",
+      "Azek, cedar, redwood, Hardie & Martech",
+      "Repaints & full repair service",
+      "Scraping & grinding",
+      "Caulking & glazing",
+      "Painting & staining",
+      "Power washing",
+    ],
+    href: "/services/exterior",
+  },
+  {
+    title: "Additional Services",
+    description:
+      "Valley Painting Co. offers premium options and specialty capabilities to ensure every project is completed to the highest standard.",
+    features: [
+      "40′ man lift — owned and operated in-house",
+      "Lifetime warranty paints available",
+    ],
+    href: null,
+  },
+];
+---
+
+<BaseLayout
+  title="Services | Valley Painting Company"
+  description="Explore Valley Painting Company's full range of interior, exterior, and specialty painting services serving Northeast Ohio."
+>
+  <section class="services-hero">
+    <div class="container">
+      <h1>Our Services</h1>
+      <p class="services-intro">
+        Whether you need a fresh coat indoors or a full exterior restoration,
+        Valley Painting Company has the skills and equipment to handle the job.
+        We serve residential and commercial clients throughout Northeast Ohio.
+      </p>
+    </div>
+  </section>
+
+  <section class="services-grid-section" aria-labelledby="services-grid-heading">
+    <div class="container">
+      <h2 id="services-grid-heading" class="sr-only">Service Categories</h2>
+      <div class="services-grid">
+        {
+          services.map((service) => (
+            <Card
+              title={service.title}
+              description={service.description}
+              href={service.href ?? undefined}
+              linkLabel="View details"
+            >
+              <ul class="feature-list">
+                {service.features.map((f) => (
+                  <li>{f}</li>
+                ))}
+              </ul>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="services-cta" aria-labelledby="cta-heading">
+    <div class="container">
+      <h2 id="cta-heading">Ready to get started?</h2>
+      <p>
+        Contact us today for a free estimate. We proudly serve the Chagrin
+        Valley and surrounding communities.
+      </p>
+      <a href="/estimate" class="cta-button">Request a Free Estimate</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Layout helpers ────────────────────────────────────────────────────── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  /* ── Hero ──────────────────────────────────────────────────────────────── */
+  .services-hero {
+    padding: var(--space-16) var(--space-4) var(--space-12);
+    text-align: center;
+  }
+
+  .services-intro {
+    margin: var(--space-6) auto 0;
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 65ch;
+  }
+
+  /* ── Service cards grid ────────────────────────────────────────────────── */
+  .services-grid-section {
+    padding: 0 var(--space-4) var(--space-16);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-8);
+  }
+
+  /* Feature list inside each card */
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .feature-list li {
+    padding-left: var(--space-5);
+    position: relative;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    margin-top: 0;
+  }
+
+  .feature-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* ── CTA strip ─────────────────────────────────────────────────────────── */
+  .services-cta {
+    background-color: var(--color-surface-alt);
+    padding: var(--space-16) var(--space-4);
+    text-align: center;
+  }
+
+  .services-cta h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .services-cta p {
+    color: var(--color-text-muted);
+    max-width: 50ch;
+    margin: 0 auto var(--space-8);
+    font-size: var(--text-lg);
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-base);
+    letter-spacing: var(--tracking-wide);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .cta-button:hover,
+  .cta-button:focus-visible {
+    opacity: 0.9;
+    color: var(--color-accent-text);
+    text-decoration: none;
+  }
+
+  /* ── Accessibility ──────────────────────────────────────────────────────── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>

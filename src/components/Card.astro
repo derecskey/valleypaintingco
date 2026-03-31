@@ -1,0 +1,89 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  href?: string;
+  linkLabel?: string;
+}
+
+const { title, description, href, linkLabel = "Learn more" } = Astro.props;
+---
+
+<article class="card">
+  <div class="card-body">
+    <h3 class="card-title">{title}</h3>
+    {description && <p class="card-description">{description}</p>}
+    <slot />
+  </div>
+  {
+    href && (
+      <div class="card-footer">
+        <a href={href} class="card-link">
+          {linkLabel}
+        </a>
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow var(--transition-base), transform var(--transition-base);
+  }
+
+  .card:hover,
+  .card:focus-within {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .card-body {
+    padding: var(--space-6) var(--space-8);
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: var(--text-2xl);
+    color: var(--color-heading);
+    margin-bottom: var(--space-3);
+  }
+
+  .card-description {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    max-width: 55ch;
+  }
+
+  .card-footer {
+    padding: var(--space-4) var(--space-8) var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .card-link {
+    display: inline-block;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-link);
+    text-decoration: none;
+    padding: var(--space-2) 0;
+    transition: color var(--transition-fast);
+  }
+
+  .card-link::after {
+    content: " →";
+  }
+
+  .card-link:hover,
+  .card-link:focus-visible {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+</style>
