@@ -85,25 +85,30 @@
     );
 
     function getActiveTheme(): string {
-      return document.documentElement.getAttribute("data-theme") ?? "";
+      const raw = document.documentElement.getAttribute("data-theme");
+      // Treat explicit "blue" the same as the default (no attribute)
+      if (raw === null || raw === "blue") return "";
+      return raw;
     }
 
     function applyTheme(value: string) {
-      if (value === "") {
+      // Normalize explicit "blue" to the default representation (no attribute)
+      const normalized = value === "blue" ? "" : value;
+      if (normalized === "") {
         document.documentElement.removeAttribute("data-theme");
       } else {
-        document.documentElement.setAttribute("data-theme", value);
+        document.documentElement.setAttribute("data-theme", normalized);
       }
       try {
-        if (value === "") {
+        if (normalized === "") {
           localStorage.removeItem(STORAGE_KEY);
         } else {
-          localStorage.setItem(STORAGE_KEY, value);
+          localStorage.setItem(STORAGE_KEY, normalized);
         }
       } catch (_) {
         // localStorage may be unavailable (e.g. private browsing restrictions)
       }
-      updateActiveOption(value);
+      updateActiveOption(normalized);
     }
 
     function updateActiveOption(activeTheme: string) {
