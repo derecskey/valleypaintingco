@@ -1,34 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
 ---
 
-<BaseLayout title="Valley Painting Company">
-  <section class="home-hero">
-    <h1>Valley Painting Company</h1>
-    <p class="tagline">
-      Northeast Ohio's trusted residential and commercial painters.
-    </p>
-    <p class="description">
-      Serving the Chagrin Valley and surrounding communities with exceptional
-      craftsmanship and attention to detail.
-    </p>
-  </section>
+<BaseLayout title="Valley Painting Company — Northeast Ohio's Trusted Painters">
+  <HeroSection />
 </BaseLayout>
-
-<style>
-  .home-hero {
-    padding: var(--space-12) var(--space-8);
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .tagline {
-    margin-top: var(--space-4);
-    font-size: var(--text-lg);
-  }
-
-  .description {
-    margin-top: var(--space-6);
-    color: var(--color-text-muted);
-  }
-</style>
