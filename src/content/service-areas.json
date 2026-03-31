@@ -1,0 +1,29 @@
+{
+  "intro": "Valley Painting Company has been serving Northeast Ohio since 1984, and the Chagrin Valley is where we call home. Nestled along the winding Chagrin River, this region is known for its charming villages, wooded estates, and tight-knit communities — the kind of places where craftsmanship and curb appeal truly matter. Whether you live steps from the Chagrin Falls waterfall or on a quiet country road in Newbury Township, we're your neighbors, and we treat your home accordingly.",
+  "regionNote": "Our crews work throughout the communities east and south of Cleveland, from established neighborhoods in Beachwood and Orange to the rural character of Hunting Valley and Kirtland Hills. Every project — whether a single accent wall or a full exterior repaint — receives the same careful preparation, premium materials, and attention to detail that has kept our clients coming back for decades.",
+  "areas": [
+    { "name": "Chagrin Falls", "note": "Our hometown — the heart of the Chagrin Valley." },
+    { "name": "Gates Mills" },
+    { "name": "Hunting Valley" },
+    { "name": "Moreland Hills" },
+    { "name": "Pepper Pike" },
+    { "name": "Waite Hill" },
+    { "name": "Bratenahl" },
+    { "name": "Kirtland Hills" },
+    { "name": "Auburn" },
+    { "name": "Bainbridge" },
+    { "name": "Hudson" },
+    { "name": "Orange" },
+    { "name": "Solon" },
+    { "name": "Bentleyville" },
+    { "name": "Aurora" },
+    { "name": "Twinsburg" },
+    { "name": "Bath" },
+    { "name": "Beachwood" },
+    { "name": "Streetsboro" },
+    { "name": "Newbury" },
+    { "name": "Novelty" },
+    { "name": "Russell" },
+    { "name": "South Russell" }
+  ]
+}
