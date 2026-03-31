@@ -33,21 +33,28 @@ try {
 } catch {
   // Directory missing or unreadable — hero renders without a background image.
 }
+
+const primaryImage: HeroImage | null = heroImages[0] ?? null;
+// Remaining images are loaded client-side to avoid fetching every slide on page load
+const remainingImagesJson = JSON.stringify(heroImages.slice(1));
 ---
 
 <section class="hero" aria-label="Welcome to Valley Painting Company">
   {
-    heroImages.length > 0 && (
-      <div class="hero-backdrop" aria-hidden="true">
-        {heroImages.map((img, i) => (
-          <img
-            src={img.src}
-            alt={img.alt}
-            class={`hero-slide${i === 0 ? " is-active" : ""}`}
-            loading={i === 0 ? "eager" : "lazy"}
-            decoding={i === 0 ? "sync" : "async"}
-          />
-        ))}
+    primaryImage && (
+      <div
+        class="hero-backdrop"
+        aria-hidden="true"
+        data-remaining-images={remainingImagesJson}
+      >
+        {/* Only the first image is server-rendered — keeps initial page weight low */}
+        <img
+          src={primaryImage.src}
+          alt={primaryImage.alt}
+          class="hero-slide is-active"
+          loading="eager"
+          decoding="sync"
+        />
       </div>
     )
   }
@@ -79,26 +86,71 @@ try {
   heroImages.length > 1 && (
     <script>
       (() => {
-        const slides = Array.from(
-          document.querySelectorAll<HTMLImageElement>(".hero-slide"),
-        );
-        if (slides.length < 2) return;
+        const backdrop =
+          document.querySelector<HTMLElement>(".hero-backdrop");
+        if (!backdrop) return;
 
+        // Parse the remaining images from the data attribute and create
+        // img elements client-side so they are not fetched on initial load.
+        let remaining: { src: string; alt: string }[] = [];
+        try {
+          remaining = JSON.parse(
+            backdrop.dataset.remainingImages ?? "[]",
+          );
+        } catch {
+          return;
+        }
+        if (remaining.length === 0) return;
+
+        remaining.forEach(({ src, alt }) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = alt;
+          img.className = "hero-slide";
+          img.loading = "lazy";
+          img.decoding = "async";
+          backdrop.appendChild(img);
+        });
+
+        const slides = Array.from(
+          backdrop.querySelectorAll<HTMLImageElement>(".hero-slide"),
+        );
         const count = slides.length;
         let current = 0;
 
-        // Pick a random starting slide without a visible transition
+        // Helper: swap the active slide instantly (no fade transition)
+        function activateInstant(nextIndex: number): void {
+          if (nextIndex === current) return;
+          slides.forEach((s) => (s.style.transitionDuration = "0s"));
+          slides[current].classList.remove("is-active");
+          slides[nextIndex].classList.add("is-active");
+          // Force a reflow so the instant swap is painted before the
+          // transition duration is restored
+          slides[nextIndex].getBoundingClientRect();
+          slides.forEach((s) => (s.style.transitionDuration = ""));
+          current = nextIndex;
+        }
+
+        // Pick a random starting slide; wait for it to fully load before
+        // swapping so the hero doesn't briefly show a blank/loading image.
         const startIndex = Math.floor(Math.random() * count);
         if (startIndex !== 0) {
-          // Temporarily suppress the CSS opacity transition
-          slides.forEach((s) => (s.style.transitionDuration = "0s"));
-          slides[0].classList.remove("is-active");
-          slides[startIndex].classList.add("is-active");
-          // Force a reflow so the browser applies the instant swap before
-          // the transition duration is restored
-          slides[startIndex].getBoundingClientRect();
-          slides.forEach((s) => (s.style.transitionDuration = ""));
-          current = startIndex;
+          const target = slides[startIndex];
+          if (target.complete && target.naturalWidth > 0) {
+            activateInstant(startIndex);
+          } else {
+            // Elevate priority so the browser fetches it sooner
+            try {
+              (target as HTMLImageElement).loading = "eager";
+            } catch {
+              // read-only in some browsers — ignore
+            }
+            target.addEventListener(
+              "load",
+              () => activateInstant(startIndex),
+              { once: true },
+            );
+          }
         }
 
         // Respect users who prefer reduced motion — keep the initial image
@@ -123,7 +175,8 @@ try {
   /* ---- Hero container ---- */
   .hero {
     position: relative;
-    min-height: 70vh;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     overflow: hidden;
