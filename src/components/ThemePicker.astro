@@ -187,10 +187,21 @@
             e.preventDefault();
             options[options.length - 1]?.focus();
             break;
+          case "Tab":
+            // Allow focus to move on, but keep menu state in sync with keyboard navigation
+            closeMenu(false);
+            break;
         }
       });
     });
 
+    // Close when focus moves outside the picker (e.g., via Tab)
+    picker.addEventListener("focusout", (e: FocusEvent) => {
+      const nextTarget = e.relatedTarget as Node | null;
+      if (!menu.hasAttribute("hidden") && (!nextTarget || !picker.contains(nextTarget))) {
+        closeMenu(false);
+      }
+    });
     // Close when clicking outside the picker
     document.addEventListener("click", (e: MouseEvent) => {
       if (
