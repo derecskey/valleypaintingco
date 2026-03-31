@@ -1,0 +1,209 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Thank You | Valley Painting Company"
+  description="Your estimate request has been received. Valley Painting Company will be in touch within one business day."
+>
+  <article class="thankyou-page">
+
+    <div class="thankyou-card">
+
+      <!-- Checkmark icon -->
+      <div class="icon-wrapper" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          focusable="false"
+        >
+          <circle cx="12" cy="12" r="10"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+
+      <h1>Request Received!</h1>
+      <p class="lead">
+        Thank you for reaching out to Valley Painting Company. We've received
+        your estimate request and will be in touch within one business day.
+      </p>
+
+      <section class="what-next" aria-labelledby="what-next-heading">
+        <h2 id="what-next-heading">What happens next?</h2>
+        <ol class="steps-list">
+          <li>We review the details of your project.</li>
+          <li>We'll reach out by phone or email to schedule a walkthrough.</li>
+          <li>You'll receive a written estimate at no charge.</li>
+        </ol>
+      </section>
+
+      <p class="direct-contact">
+        Need to reach us sooner? Call
+        <a href="tel:+14405432840">440.543.2840</a> or email
+        <a href="mailto:ashley@valleypaintingco.com">ashley@valleypaintingco.com</a>.
+      </p>
+
+      <nav class="thankyou-nav" aria-label="Continue browsing">
+        <a href="/" class="btn-primary">Back to Home</a>
+        <a href="/services" class="btn-secondary">Explore Our Services</a>
+      </nav>
+
+    </div>
+
+  </article>
+</BaseLayout>
+
+<style>
+  /* ── Page centering ────────────────────────────────────────────────────── */
+  .thankyou-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: var(--space-12) var(--space-6);
+  }
+
+  /* ── Card ──────────────────────────────────────────────────────────────── */
+  .thankyou-card {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    padding: var(--space-12) var(--space-10);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ── Check icon ────────────────────────────────────────────────────────── */
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-6);
+    background-color: var(--color-bg-alt);
+    border-radius: var(--radius-full);
+    color: var(--color-accent);
+  }
+
+  /* ── Heading + lead ────────────────────────────────────────────────────── */
+  .thankyou-card h1 {
+    margin-bottom: var(--space-4);
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 50ch;
+    margin-inline: auto;
+  }
+
+  /* ── What's next section ───────────────────────────────────────────────── */
+  .what-next {
+    margin-top: var(--space-10);
+    text-align: left;
+    padding: var(--space-6) var(--space-8);
+    background-color: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-accent);
+  }
+
+  .what-next h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .steps-list {
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .steps-list li {
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    margin-top: 0;
+  }
+
+  /* ── Direct contact ────────────────────────────────────────────────────── */
+  .direct-contact {
+    margin-top: var(--space-8);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-width: none;
+  }
+
+  /* ── CTA nav ───────────────────────────────────────────────────────────── */
+  .thankyou-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-8);
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-base);
+    padding: var(--space-3) var(--space-8);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    opacity: 0.9;
+    color: var(--color-accent-text);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-text);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-base);
+    padding: var(--space-3) var(--space-8);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    background-color: var(--color-bg-alt);
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  /* ── Responsive ────────────────────────────────────────────────────────── */
+  @media (max-width: 480px) {
+    .thankyou-card {
+      padding: var(--space-8) var(--space-6);
+    }
+
+    .what-next {
+      padding: var(--space-5) var(--space-6);
+    }
+
+    .thankyou-nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
