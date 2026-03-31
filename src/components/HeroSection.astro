@@ -329,9 +329,11 @@ const heroImagesJson = JSON.stringify(heroImages);
     position: relative;
     z-index: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-2);
     padding: var(--space-3) var(--space-6);
+    text-align: center;
     /* Layered transparency — partially occludes the image behind */
     background: rgb(0 27 52 / 0.6);
     backdrop-filter: blur(6px);
@@ -339,7 +341,7 @@ const heroImagesJson = JSON.stringify(heroImages);
   }
 
   .hero-testimonial-track {
-    flex: 1;
+    width: 100%;
     /* Stack all slides in the same grid cell; height is set by tallest slide */
     display: grid;
     min-height: 4.5rem;
@@ -358,14 +360,12 @@ const heroImagesJson = JSON.stringify(heroImages);
   }
 
   .hero-reviews-link {
-    flex-shrink: 0;
     color: var(--color-blue-50);
     font-size: var(--text-xs);
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--tracking-wide);
     text-decoration: underline;
     text-underline-offset: 2px;
-    white-space: nowrap;
     transition: color var(--transition-fast);
   }
 
@@ -397,9 +397,6 @@ const heroImagesJson = JSON.stringify(heroImages);
     }
 
     .hero-testimonials {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-2);
       padding: var(--space-3) var(--space-4);
     }
 
