@@ -11,3 +11,17 @@ Astro-based, static-first brochure website for Valley Painting Company (valleypa
 
 **Note:** Empty folders are tracked with a `.keep` file so git can commit them.
 
+## Local Development
+
+```bash
+npm install        # Install dependencies
+npm run dev        # Start dev server at http://localhost:4321
+```
+
+## Build
+
+```bash
+npm run build      # Build static site to dist/
+npm run preview    # Preview the production build locally
+```
+

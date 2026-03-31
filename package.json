@@ -1,0 +1,21 @@
+{
+  "name": "valleypaintingco",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=18.14.0"
+  },
+  "scripts": {
+    "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.5.5",
+    "cross-env": "^7.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
