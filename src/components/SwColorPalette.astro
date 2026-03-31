@@ -1,0 +1,154 @@
+---
+// SwColorPalette.astro
+// Color palette inspiration card that appears automatically when a Sherwin
+// Williams theme is active. Displays paint chip swatches with SW numbers and
+// color names so visitors can take the palette to their local paint store.
+
+interface SwColor {
+  name: string;
+  number: string;
+  hex: string;
+}
+
+const whiteSnowPalette: SwColor[] = [
+  { name: "White Snow",  number: "SW 9541", hex: "#f2ede5" },
+  { name: "Autonomous",  number: "SW 9557", hex: "#7b8b9e" },
+  { name: "Night Out",   number: "SW 9560", hex: "#1c2636" },
+  { name: "Stone Fruit", number: "SW 9699", hex: "#bf8275" },
+];
+---
+
+<!-- Shown only when a Sherwin Williams theme is active (controlled via CSS below) -->
+<aside class="sw-palette" aria-label="Color palette inspiration">
+  <div class="sw-palette-inner">
+    <div class="sw-palette-heading">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="18"
+        height="18"
+        fill="currentColor"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2C17.5,2 22,6 22,11A6,6 0 0,1 16,17H14.2C13.9,17 13.7,17.2 13.7,17.5C13.7,17.6 13.8,17.7 13.8,17.8C14.3,18.3 14.6,19 14.6,19.7C14.6,21 13.5,22 12,22M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C12.3,20 12.5,19.8 12.5,19.5C12.5,19.3 12.4,19.2 12.4,19.1C11.9,18.6 11.6,17.9 11.6,17.2C11.6,15.9 12.7,14.9 14.2,14.9H16A4,4 0 0,0 20,11C20,7.1 16.4,4 12,4M6.5,10C7.3,10 8,10.7 8,11.5C8,12.3 7.3,13 6.5,13C5.7,13 5,12.3 5,11.5C5,10.7 5.7,10 6.5,10M9.5,6C10.3,6 11,6.7 11,7.5C11,8.3 10.3,9 9.5,9C8.7,9 8,8.3 8,7.5C8,6.7 8.7,6 9.5,6M14.5,6C15.3,6 16,6.7 16,7.5C16,8.3 15.3,9 14.5,9C13.7,9 13,8.3 13,7.5C13,6.7 13.7,6 14.5,6M17.5,10C18.3,10 19,10.7 19,11.5C19,12.3 18.3,13 17.5,13C16.7,13 16,12.3 16,11.5C16,10.7 16.7,10 17.5,10Z" />
+      </svg>
+      <span>Color Palette Inspiration</span>
+    </div>
+
+    <ul class="sw-chips" role="list">
+      {whiteSnowPalette.map(({ name, number, hex }) => (
+        <li class="sw-chip">
+          <div
+            class="sw-chip-swatch"
+            style={`background-color: ${hex};`}
+            aria-hidden="true"
+          ></div>
+          <div class="sw-chip-info">
+            <span class="sw-chip-name">{name}</span>
+            <span class="sw-chip-number">{number}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</aside>
+
+<style is:global>
+  /* Hidden by default; revealed when a SW theme is active */
+  .sw-palette {
+    display: none;
+  }
+
+  html[data-theme="white-snow"] .sw-palette {
+    display: block;
+  }
+</style>
+
+<style>
+  .sw-palette {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sw-palette-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .sw-palette-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+    white-space: nowrap;
+  }
+
+  /* Override the global `li + li { margin-top }` rule */
+  .sw-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sw-chips li + li {
+    margin-top: 0;
+  }
+
+  .sw-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .sw-chip-swatch {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgb(0 0 0 / 0.12);
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+  }
+
+  .sw-chip-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sw-chip-name {
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+    text-align: center;
+    line-height: var(--leading-snug);
+  }
+
+  .sw-chip-number {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-align: center;
+    line-height: var(--leading-snug);
+  }
+
+  @media (max-width: 40rem) {
+    .sw-palette-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-4);
+    }
+  }
+</style>
