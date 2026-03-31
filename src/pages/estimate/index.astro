@@ -19,12 +19,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <div class="estimate-layout">
 
       <!--
-        Form action: POST to Formspree.
-        Setup instructions:
-          1. Sign up for a free account at https://formspree.io
-          2. Create a new form and copy the form ID
-          3. Replace YOUR_FORM_ID below with the actual form ID
-          4. Update the _next value to your live domain + /estimate/thank-you
+        Form submission: handled entirely client-side via mailto:.
+        JavaScript intercepts the submit event, assembles a formatted email
+        body from the field values, then sets window.location.href to a
+        mailto: URI — which opens the user's native email client pre-filled.
+        After a short delay the browser navigates to /estimate/thank-you.
+
+        No-JS fallback: the form's action="mailto:..." means browsers that
+        support it will open the email client directly when JS is unavailable.
       -->
       <section class="form-section" aria-labelledby="form-heading">
         <h2 id="form-heading" class="visually-hidden">Estimate request form</h2>
@@ -33,21 +35,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           id="estimate-form"
           class="estimate-form"
           method="POST"
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="mailto:ashley@valleypaintingco.com"
+          enctype="text/plain"
         >
-          <!-- Redirect to the thank-you page after successful submission -->
-          <input
-            type="hidden"
-            name="_next"
-            value="/estimate/thank-you"
-          />
-          <!-- Custom email subject line -->
-          <input
-            type="hidden"
-            name="_subject"
-            value="New Estimate Request — Valley Painting Company"
-          />
-
           <!--
             Honeypot anti-spam field.
             Visually hidden and excluded from tab order so real users never
@@ -227,18 +217,60 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
-  // Honeypot anti-spam protection.
-  // If the hidden "website" field is filled in, the submission likely came
-  // from an automated bot. Silently block the request so spam never reaches
-  // the inbox. Real users never see or interact with this field.
+  // Intercept form submission and open the user's native email client with
+  // all fields pre-filled. After the mailto: URI is triggered, the browser
+  // navigates to the thank-you page.
   const form = document.getElementById("estimate-form") as HTMLFormElement | null;
   const honeypot = document.getElementById("hp-website") as HTMLInputElement | null;
 
   if (form && honeypot) {
     form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // Honeypot check — bots fill hidden fields; real users never see this.
       if (honeypot.value.trim() !== "") {
-        e.preventDefault();
+        return;
       }
+
+      // Collect field values — guard against unexpected DOM changes.
+      const nameEl    = form.querySelector<HTMLInputElement>("#name");
+      const emailEl   = form.querySelector<HTMLInputElement>("#email");
+      const phoneEl   = form.querySelector<HTMLInputElement>("#phone");
+      const serviceEl = form.querySelector<HTMLSelectElement>("#service");
+      const messageEl = form.querySelector<HTMLTextAreaElement>("#message");
+
+      if (!nameEl || !emailEl || !phoneEl || !serviceEl || !messageEl) {
+        return;
+      }
+
+      const name    = nameEl.value.trim();
+      const email   = emailEl.value.trim();
+      const phone   = phoneEl.value.trim();
+      const service = serviceEl.value;
+      const message = messageEl.value.trim();
+
+      // Build a readable email body.
+      const bodyLines: string[] = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+      ];
+      if (phone) bodyLines.push(`Phone: ${phone}`);
+      bodyLines.push(`Service: ${service}`, "", "Project Description:", message);
+
+      const to      = "ashley@valleypaintingco.com";
+      const subject = encodeURIComponent("New Estimate Request — Valley Painting Company");
+      const body    = encodeURIComponent(bodyLines.join("\n"));
+
+      // Open the email client with the pre-filled message.
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+
+      // Wait briefly so the email client has time to launch before the page
+      // navigates away. 400ms is long enough on most OS/browser combinations
+      // without feeling sluggish to the user.
+      const EMAIL_CLIENT_LAUNCH_DELAY = 400;
+      setTimeout(() => {
+        window.location.href = "/estimate/thank-you";
+      }, EMAIL_CLIENT_LAUNCH_DELAY);
     });
   }
 </script>

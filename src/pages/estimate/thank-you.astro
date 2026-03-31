@@ -3,14 +3,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Thank You | Valley Painting Company"
-  description="Your estimate request has been received. Valley Painting Company will be in touch within one business day."
+  title="Send Your Estimate Request | Valley Painting Company"
+  description="Your estimate request has been prepared. Open your email client and click Send to complete the request."
 >
   <article class="thankyou-page">
 
     <div class="thankyou-card">
 
-      <!-- Checkmark icon -->
+      <!-- Envelope / send icon -->
       <div class="icon-wrapper" aria-hidden="true">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,30 +24,31 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           stroke-linejoin="round"
           focusable="false"
         >
-          <circle cx="12" cy="12" r="10"/>
-          <path d="m9 12 2 2 4-4"/>
+          <rect width="20" height="16" x="2" y="4" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
         </svg>
       </div>
 
-      <h1>Request Received!</h1>
+      <h1>Almost There!</h1>
       <p class="lead">
-        Thank you for reaching out to Valley Painting Company. We've received
-        your estimate request and will be in touch within one business day.
+        Your estimate request is ready. Your email client should have opened
+        with everything pre-filled — just hit <em>Send</em> to submit
+        your request.
       </p>
 
       <section class="what-next" aria-labelledby="what-next-heading">
-        <h2 id="what-next-heading">What happens next?</h2>
+        <h2 id="what-next-heading">What happens after you send?</h2>
         <ol class="steps-list">
-          <li>We review the details of your project.</li>
+          <li>We receive your request directly in our inbox.</li>
           <li>We'll reach out by phone or email to schedule a walkthrough.</li>
           <li>You'll receive a written estimate at no charge.</li>
         </ol>
       </section>
 
       <p class="direct-contact">
-        Need to reach us sooner? Call
-        <a href="tel:+14405432840">440.543.2840</a> or email
-        <a href="mailto:ashley@valleypaintingco.com">ashley@valleypaintingco.com</a>.
+        Email client didn't open? Email us directly at
+        <a href="mailto:ashley@valleypaintingco.com">ashley@valleypaintingco.com</a>
+        or call <a href="tel:+14405432840">440.543.2840</a>.
       </p>
 
       <nav class="thankyou-nav" aria-label="Continue browsing">
