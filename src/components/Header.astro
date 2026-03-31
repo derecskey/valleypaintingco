@@ -39,19 +39,26 @@ const navLinks = [
 </header>
 
 <script>
-  const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+  const toggle = document.querySelector(".nav-toggle");
   const nav = document.getElementById("primary-nav");
 
-  toggle?.addEventListener("click", () => {
+  if (!toggle || !nav) {
+    // Required elements are missing; safely abort script.
+    // This avoids runtime errors if the header markup changes.
+    // eslint-disable-next-line no-useless-return
+    return;
+  }
+
+  toggle.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!expanded));
-    nav?.classList.toggle("is-open", !expanded);
+    nav.classList.toggle("is-open", !expanded);
   });
 
   // Close nav when a link is clicked (on mobile, after navigating)
-  nav?.querySelectorAll("a").forEach((link) => {
+  nav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      toggle?.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-expanded", "false");
       nav.classList.remove("is-open");
     });
   });
