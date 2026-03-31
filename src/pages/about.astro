@@ -1,0 +1,253 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About Valley Painting Company | Dan Derecskey — Chagrin Falls, OH"
+  description="Meet Dan Derecskey, founder of Valley Painting Company. Serving the Chagrin Valley with professional residential and commercial painting since 1984."
+>
+  <article class="about-page">
+
+    <!-- Page header -->
+    <header class="page-header">
+      <h1>About Valley Painting Company</h1>
+      <p class="page-subtitle">
+        Serving the Chagrin Valley with professional craftsmanship since 1984.
+      </p>
+    </header>
+
+    <!-- Owner intro -->
+    <section class="owner-section" aria-labelledby="owner-heading">
+      <div class="owner-content">
+        <div class="owner-text">
+          <h2 id="owner-heading">Meet Dan Derecskey</h2>
+          <p>
+            The founder of Valley Painting Company, Dan Derecskey, was born and
+            raised in Chagrin Falls and graduated from Chagrin Falls High School.
+            Since 1984, Dan has helped clients throughout the Chagrin Valley
+            complete their residential and commercial painting and wallpapering
+            projects — both interior and exterior.
+          </p>
+          <p>
+            Dan and his crew bring professional workmanship and decades of
+            combined experience to every job, ensuring a long-lasting, quality
+            result. Each project is completed with one goal in mind: every
+            customer leaves fully satisfied.
+          </p>
+        </div>
+
+        <figure class="owner-photo">
+          <img
+            src="/images/dan-derecskey.jpg"
+            alt="Dan Derecskey, founder of Valley Painting Company, with his dog in his work vehicle"
+            width="480"
+            height="640"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Dan Derecskey — Founder, Valley Painting Company</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- What we do -->
+    <section class="values-section" aria-labelledby="values-heading">
+      <h2 id="values-heading">Our Commitment to You</h2>
+      <p>
+        Valley Painting is a fully insured professional painting company. We
+        strive to meet all of our clients' needs in a professional and timely
+        manner. From the first call to the final walkthrough, we treat every
+        home and business with the same care and respect we'd want for our own.
+      </p>
+      <ul class="values-list">
+        <li>
+          <strong>Professional workmanship</strong> — over 40 years of combined
+          experience on every job.
+        </li>
+        <li>
+          <strong>Fully insured</strong> — giving you peace of mind from start
+          to finish.
+        </li>
+        <li>
+          <strong>Customer satisfaction</strong> — we don't consider a job done
+          until you're completely happy.
+        </li>
+        <li>
+          <strong>Timely and reliable</strong> — we show up when we say we will
+          and finish when we say we will.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Community -->
+    <section class="community-section" aria-labelledby="community-heading">
+      <h2 id="community-heading">Giving Back to the Community</h2>
+      <p>
+        Our company feels strongly about giving back to the community we call
+        home. Over the years we have donated labor hours, materials, and money
+        to local causes throughout the Chagrin Valley.
+      </p>
+      <p>
+        In 2009, Valley Painting Company donated approximately $950 worth of
+        time and materials to repair and repaint the Chagrin Falls Township Hall
+        cupola. We have also made contributions to the Geauga County Dog Warden
+        by staining their shelter, painted maracas for the Chagrin Valley
+        Women's League, and donated raffle certificates for the Chagrin Valley
+        Jaycees, Chagrin Valley Chamber of Commerce, Chagrin Falls P.T.O., and
+        many other organizations throughout the valley.
+      </p>
+      <p>
+        For more information on donations or to request a donation, please
+        contact us at
+        <a href="mailto:ashley@valleypaintingco.com">ashley@valleypaintingco.com</a>.
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" aria-labelledby="cta-heading">
+      <h2 id="cta-heading">Ready to Get Started?</h2>
+      <p>
+        Whether you need interior painting, exterior painting, or wallpapering
+        for your home or business, Dan and his crew are ready to help. Contact
+        us today for a free estimate.
+      </p>
+      <a href="/estimate" class="cta-button">Request an Estimate</a>
+    </section>
+
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-6);
+  }
+
+  /* Page header */
+  .page-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .page-subtitle {
+    margin-top: var(--space-4);
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+  }
+
+  /* Sections */
+  .owner-section,
+  .values-section,
+  .community-section,
+  .cta-section {
+    margin-bottom: var(--space-16);
+  }
+
+  .owner-section h2,
+  .values-section h2,
+  .community-section h2,
+  .cta-section h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  /* Owner section: side-by-side on wider screens */
+  .owner-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-10);
+    align-items: start;
+  }
+
+  .owner-text h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  /* Owner photo */
+  .owner-photo img {
+    width: 280px;
+    max-width: 100%;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    object-fit: cover;
+  }
+
+  .owner-photo figcaption {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  /* Values list */
+  .values-list {
+    margin-top: var(--space-6);
+    display: grid;
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+  }
+
+  .values-list li {
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--color-surface);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    line-height: var(--leading-relaxed);
+  }
+
+  /* CTA section */
+  .cta-section {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-10) var(--space-8);
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-section p {
+    margin: 0 auto var(--space-8);
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-base);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .cta-button:hover,
+  .cta-button:focus-visible {
+    opacity: 0.9;
+    color: var(--color-accent-text);
+  }
+
+  /* Responsive: stack photo below text on narrow screens */
+  @media (max-width: 680px) {
+    .owner-content {
+      grid-template-columns: 1fr;
+    }
+
+    .owner-text {
+      order: 2;
+    }
+
+    .owner-photo {
+      order: 1;
+    }
+
+    .owner-photo img {
+      width: 100%;
+      max-height: 380px;
+    }
+  }
+</style>
