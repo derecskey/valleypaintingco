@@ -1,11 +1,20 @@
 ---
+import { Image } from "astro:assets";
+import logoSrc from "../assets/logos/valleyweblogo.png";
+
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <p class="footer-company">Valley Painting Company</p>
+      <Image
+        src={logoSrc}
+        alt="Valley Painting Company"
+        width={113}
+        height={36}
+        class="footer-logo"
+      />
       <p class="footer-tagline">
         Chagrin Falls, Ohio &mdash; Established 1984
       </p>
@@ -103,12 +112,10 @@ const currentYear = new Date().getFullYear();
   }
 
   /* Brand column */
-  .footer-company {
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-white);
-    max-width: none;
+  .footer-logo {
+    display: block;
+    height: 36px;
+    width: auto;
     margin-bottom: var(--space-2);
   }
 

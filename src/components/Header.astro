@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import logoSrc from "../assets/logos/valleyweblogo.png";
 import ThemePicker from "./ThemePicker.astro";
 
 const navLinks = [
@@ -13,7 +15,13 @@ const navLinks = [
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="logo" aria-label="Valley Painting Company — Home">
-      <span class="logo-name">Valley Painting Company</span>
+      <Image
+        src={logoSrc}
+        alt="Valley Painting Company"
+        width={138}
+        height={44}
+        class="logo-img"
+      />
     </a>
 
     <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
@@ -119,18 +127,15 @@ const navLinks = [
     flex-shrink: 0;
   }
 
-  .logo-name {
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-white);
-    letter-spacing: var(--tracking-tight);
-    line-height: var(--leading-tight);
+  .logo-img {
+    display: block;
+    height: 44px;
+    width: auto;
   }
 
-  .logo:hover .logo-name,
-  .logo:focus-visible .logo-name {
-    color: var(--color-blue-100);
+  .logo:hover .logo-img,
+  .logo:focus-visible .logo-img {
+    opacity: 0.85;
   }
 
   /* Controls area: theme picker + hamburger toggle */
