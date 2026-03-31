@@ -4,9 +4,10 @@ interface Props {
   description?: string;
   href?: string;
   linkLabel?: string;
+  linkAriaLabel?: string;
 }
 
-const { title, description, href, linkLabel = "Learn more" } = Astro.props;
+const { title, description, href, linkLabel = "Learn more", linkAriaLabel } = Astro.props;
 ---
 
 <article class="card">
@@ -18,7 +19,7 @@ const { title, description, href, linkLabel = "Learn more" } = Astro.props;
   {
     href && (
       <div class="card-footer">
-        <a href={href} class="card-link">
+        <a href={href} class="card-link" aria-label={linkAriaLabel}>
           {linkLabel}
         </a>
       </div>

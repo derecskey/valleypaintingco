@@ -18,7 +18,7 @@ const services = [
       "New construction & repaints",
       "Airless & conventional spray",
     ],
-    href: "/services/interior",
+    href: null,
   },
   {
     title: "Exterior Painting",
@@ -34,7 +34,7 @@ const services = [
       "Painting & staining",
       "Power washing",
     ],
-    href: "/services/exterior",
+    href: null,
   },
   {
     title: "Additional Services",
@@ -74,7 +74,8 @@ const services = [
               title={service.title}
               description={service.description}
               href={service.href ?? undefined}
-              linkLabel="View details"
+              linkLabel={`View ${service.title.toLowerCase()} details`}
+              linkAriaLabel={`View details for ${service.title}`}
             >
               <ul class="feature-list">
                 {service.features.map((f) => (
