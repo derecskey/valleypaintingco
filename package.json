@@ -2,6 +2,10 @@
   "name": "valleypaintingco",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=18.14.0"
+  },
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
