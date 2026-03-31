@@ -3,14 +3,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Valley Painting Company">
-  <main style="padding: var(--space-12) var(--space-8); max-width: 800px; margin: 0 auto;">
+  <main class="home-main">
     <h1>Valley Painting Company</h1>
-    <p style="margin-top: var(--space-4); font-size: var(--text-lg);">
+    <p class="tagline">
       Northeast Ohio's trusted residential and commercial painters.
     </p>
-    <p style="margin-top: var(--space-6); color: var(--color-text-muted);">
+    <p class="description">
       Serving the Chagrin Valley and surrounding communities with exceptional
       craftsmanship and attention to detail.
     </p>
   </main>
 </BaseLayout>
+
+<style>
+  .home-main {
+    padding: var(--space-12) var(--space-8);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .tagline {
+    margin-top: var(--space-4);
+    font-size: var(--text-lg);
+  }
+
+  .description {
+    margin-top: var(--space-6);
+    color: var(--color-text-muted);
+  }
+</style>
