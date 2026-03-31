@@ -25,8 +25,8 @@ import testimonials from "../content/testimonials.json";
               <p>{t.quote}</p>
               <footer>
                 <cite>
-                  {t.attribution}
-                  {t.detail ? <span class="detail">{t.detail}</span> : null}
+                  <span aria-hidden="true">— </span>{t.attribution}
+                  {t.detail ? <><span class="detail-sep" aria-hidden="true">·</span><span class="detail">{t.detail}</span></> : null}
                 </cite>
               </footer>
             </blockquote>
@@ -120,17 +120,12 @@ import testimonials from "../content/testimonials.json";
     gap: var(--space-1) var(--space-2);
   }
 
-  .testimonial-item cite::before {
-    content: "\2014\00a0"; /* em dash + non-breaking space */
+  .detail-sep {
+    color: var(--color-text-muted);
   }
 
   .detail {
     font-weight: var(--font-weight-normal);
-  }
-
-  .detail::before {
-    content: "\B7\00a0"; /* middle dot + non-breaking space */
-    margin-right: var(--space-1);
   }
 
   .review-platforms {
