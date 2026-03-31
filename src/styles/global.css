@@ -2,13 +2,14 @@
    VALLEY PAINTING COMPANY — Global Stylesheet
    ==========================================================================
    Defines the design system: color palette, typography, spacing, and base
-   styles for all six themes:
+  styles for all seven themes:
      • Blue        (default) — brand identity: white on cobalt blue
      • Light                  — elegant, warm off-white with blue accents
      • Dark                   — sophisticated deep-navy with blue accents
      • White Snow (SW 9541)  — crisp warm white inspired by Sherwin Williams
      • Rain Cloud (SW 9639)  — layered greige + warm neutral Sherwin palette
      • Silhouette (AF-655)   — Benjamin Moore Affinity palette theme
+     • Hidden Gem (N430-6A)  — Behr-inspired slate and warm natural neutrals
    ========================================================================== */
 
 /* ==========================================================================
@@ -423,6 +424,64 @@
   /* Hero CTA (Call Now) */
   --color-hero-cta-primary-bg:   var(--color-accent);
   --color-hero-cta-primary-text: #403b38;
+  --color-hero-cta-primary-border: transparent;
+}
+
+/* ===========================================================================
+   HIDDEN GEM THEME — Inspired by Behr 2026 Color of the Year N430-6A
+  Palette: Hidden Gem N430-6A, Very Navy M500-7, Summer Dragonfly M440-4, Polar Bear 75
+   ========================================================================== */
+[data-theme="hidden-gem"] {
+  --color-bg:          #f5f4ec;   /* Behr 75 Polar Bear */
+  --color-bg-alt:      #e7ece8;
+  --color-surface:     #f4f6f4;
+  --color-surface-alt: #eceeea;
+  --color-text:        #3a4859;   /* Behr M500-7 Very Navy */
+  --color-text-muted:  #596d69;   /* Behr N430-6A Hidden Gem */
+  --color-heading:     #3a4859;   /* Behr M500-7 Very Navy */
+  --color-link:        #596d69;   /* Behr N430-6A Hidden Gem */
+  --color-link-hover:  #3a4859;
+  --color-border:      #c9cec8;
+  --color-accent:      #83ada3;   /* Behr M440-4 Summer Dragonfly */
+  --color-accent-text: #10222d;
+
+  /* Header / footer / mobile-nav backgrounds */
+  --color-header-bg:   #3a4859;   /* Behr M500-7 Very Navy */
+  --color-footer-bg:   #596d69;   /* Behr N430-6A Hidden Gem */
+  --color-nav-bg:      #3a4859;
+
+  /* Header foreground palette */
+  --color-header-text:          #f5f4ec; /* Behr 75 Polar Bear */
+  --color-header-control-hover: rgb(245 244 236 / 0.16);
+  --color-header-link:          #f5f4ec;
+  --color-header-link-hover-bg: rgb(245 244 236 / 0.16);
+  --color-header-link-hover:    #ffffff;
+  --color-header-mobile-divider: rgb(245 244 236 / 0.22);
+
+  /* Footer foreground palette */
+  --color-footer-text:        #f5f4ec;
+  --color-footer-heading:     #f5f4ec;
+  --color-footer-muted:       #f5f4ec;
+  --color-footer-label:       #83ada3;   /* Summer Dragonfly accent */
+  --color-footer-link:        #f5f4ec;
+  --color-footer-link-hover:  #ffffff;
+  --color-footer-bottom-text: #f5f4ec;
+  --color-footer-divider:     rgb(245 244 236 / 0.22);
+
+  /* Theme picker menu palette */
+  --color-theme-menu-bg:          #ffffff;
+  --color-theme-menu-text:        #3a4859;
+  --color-theme-menu-border:      #c9cec8;
+  --color-theme-menu-shadow-1:    rgb(0 0 0 / 0.15);
+  --color-theme-menu-shadow-2:    rgb(0 0 0 / 0.08);
+  --color-theme-option-hover-bg:  #eceeea;
+  --color-theme-option-focus:     #596d69;
+  --color-theme-option-check:     #596d69;
+  --color-theme-swatch-border:    rgb(58 72 89 / 0.2);
+
+  /* Hero CTA (Call Now) */
+  --color-hero-cta-primary-bg:   var(--color-accent);
+  --color-hero-cta-primary-text: #1f2328;
   --color-hero-cta-primary-border: transparent;
 }
 
