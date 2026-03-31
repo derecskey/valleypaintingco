@@ -1,0 +1,207 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import serviceAreasData from "../content/service-areas.json";
+
+const { intro, regionNote, areas } = serviceAreasData;
+---
+
+<BaseLayout
+  title="Service Areas — Valley Painting Company | Northeast Ohio Painters"
+  description="Valley Painting Company serves Chagrin Falls, Solon, Bainbridge, Moreland Hills, Pepper Pike, and 18 other Northeast Ohio communities. Request a free estimate today."
+>
+  <div class="service-areas-page">
+    <header class="page-header">
+      <h1>Service Areas</h1>
+      <p class="subtitle">Proudly serving Northeast Ohio since 1984</p>
+    </header>
+
+    <section class="intro-section" aria-labelledby="about-region-heading">
+      <h2 id="about-region-heading" class="visually-hidden">About Our Region</h2>
+      <p>{intro}</p>
+      <p>{regionNote}</p>
+    </section>
+
+    <section class="areas-section" aria-labelledby="communities-heading">
+      <h2 id="communities-heading">Communities We Serve</h2>
+      <ul class="areas-list" aria-label="List of service area communities">
+        {areas.map((area: { name: string; note?: string }) => (
+          <li class="area-item">
+            <span class="area-name">{area.name}</span>
+            {area.note && <span class="area-note">{area.note}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="cta-section" aria-labelledby="cta-heading">
+      <h2 id="cta-heading">Ready to Get Started?</h2>
+      <p>
+        Don't see your town listed? Give us a call — we frequently work in
+        surrounding communities and are happy to discuss your project.
+      </p>
+      <div class="cta-actions">
+        <a href="/estimate" class="btn-primary">Request a Free Estimate</a>
+        <a href="tel:+14405432840" class="btn-secondary">Call 440.543.2840</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .service-areas-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-8);
+  }
+
+  /* Page header */
+  .page-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--space-3);
+  }
+
+  .subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+  }
+
+  /* Intro prose */
+  .intro-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .intro-section p {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Communities section */
+  .areas-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .areas-section h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-8);
+  }
+
+  .areas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .areas-list li {
+    margin-top: 0;
+  }
+
+  .area-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .area-name {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-lg);
+    color: var(--color-heading);
+  }
+
+  .area-note {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  /* CTA section */
+  .cta-section {
+    padding: var(--space-10) var(--space-8);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+  }
+
+  .cta-section h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .cta-section p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--text-base);
+    text-decoration: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    opacity: 0.9;
+    color: var(--color-accent-text);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-link);
+    border: 2px solid currentColor;
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    color: var(--color-link-hover);
+  }
+
+  @media (max-width: 600px) {
+    .service-areas-page {
+      padding: var(--space-8) var(--space-4);
+    }
+
+    .areas-list {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cta-section {
+      padding: var(--space-8) var(--space-4);
+    }
+
+    .cta-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      text-align: center;
+    }
+  }
+</style>
