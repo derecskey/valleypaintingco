@@ -86,10 +86,6 @@ const { quote, attribution, detail, variant = "default" } = Astro.props;
     color: var(--color-white);
     text-align: center;
     text-shadow: 0 1px 4px rgb(0 0 0 / 0.5);
-    /* Clamp long quotes to 3 lines for a stable strip height */
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
