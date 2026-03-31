@@ -177,17 +177,18 @@ const navLinks = [
   }
 
   /* CTA button in nav */
-  .nav-cta {
-    background-color: var(--color-accent) !important;
-    color: var(--color-accent-text) !important;
-    border-radius: var(--radius-md) !important;
-    padding: var(--space-2) var(--space-4) !important;
-    transition: opacity var(--transition-fast) !important;
+  .nav-list .nav-cta {
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
+    border-radius: var(--radius-md);
+    padding: var(--space-2) var(--space-4);
+    transition: opacity var(--transition-fast);
   }
 
-  .nav-cta:hover,
-  .nav-cta:focus-visible {
-    background-color: var(--color-accent) !important;
+  .nav-list .nav-cta:hover,
+  .nav-list .nav-cta:focus-visible {
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
     opacity: 0.9;
   }
 
