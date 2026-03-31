@@ -34,27 +34,18 @@ try {
   // Directory missing or unreadable — hero renders without a background image.
 }
 
-const primaryImage: HeroImage | null = heroImages[0] ?? null;
-// Remaining images are loaded client-side to avoid fetching every slide on page load
-const remainingImagesJson = JSON.stringify(heroImages.slice(1));
+const heroImagesJson = JSON.stringify(heroImages);
 ---
 
 <section class="hero" aria-label="Welcome to Valley Painting Company">
   {
-    primaryImage && (
+    heroImages.length > 0 && (
       <div
         class="hero-backdrop"
         aria-hidden="true"
-        data-remaining-images={remainingImagesJson}
+        data-hero-images={heroImagesJson}
       >
-        {/* Only the first image is server-rendered — keeps initial page weight low */}
-        <img
-          src={primaryImage.src}
-          alt={primaryImage.alt}
-          class="hero-slide is-active"
-          loading="eager"
-          decoding="sync"
-        />
+        {/* Image is injected client-side so that only the randomly chosen one is fetched */}
       </div>
     )
   }
@@ -83,126 +74,63 @@ const remainingImagesJson = JSON.stringify(heroImages.slice(1));
 </section>
 
 {
-  heroImages.length > 1 && (
+  heroImages.length > 0 && (
     <script>
       (() => {
         const backdrop =
           document.querySelector<HTMLElement>(".hero-backdrop");
         if (!backdrop) return;
 
-        // Parse the remaining images from the data attribute and create
-        // img elements client-side so they are not fetched on initial load.
-        let remaining: { src: string; alt: string }[] = [];
+        let images: { src: string; alt: string }[] = [];
         try {
-          remaining = JSON.parse(
-            backdrop.dataset.remainingImages ?? "[]",
-          );
+          images = JSON.parse(backdrop.dataset.heroImages ?? "[]");
         } catch {
           return;
         }
-        if (remaining.length === 0) return;
+        if (images.length === 0) return;
 
-        remaining.forEach(({ src, alt }) => {
-          const img = document.createElement("img");
-          img.src = src;
-          img.alt = alt;
-          img.className = "hero-slide";
-          img.loading = "lazy";
-          img.decoding = "async";
-          backdrop.appendChild(img);
-        });
-
-        const slides = Array.from(
-          backdrop.querySelectorAll<HTMLImageElement>(".hero-slide"),
-        );
-        const count = slides.length;
-        let current = 0;
-
-        // Helper: swap the active slide instantly (no fade transition)
-        function activateInstant(nextIndex: number): void {
-          if (nextIndex === current) return;
-          slides.forEach((s) => (s.style.transitionDuration = "0s"));
-          slides[current].classList.remove("is-active");
-          slides[nextIndex].classList.add("is-active");
-          // Force a reflow so the instant swap is painted before the
-          // transition duration is restored
-          slides[nextIndex].getBoundingClientRect();
-          slides.forEach((s) => (s.style.transitionDuration = ""));
-          current = nextIndex;
-        }
-
-        // Pick a random starting slide; wait for it to fully load before
-        // swapping so the hero doesn't briefly show a blank/loading image.
-        const startIndex = Math.floor(Math.random() * count);
-        if (startIndex !== 0) {
-          const target = slides[startIndex];
-          if (target.complete && target.naturalWidth > 0) {
-            activateInstant(startIndex);
-          } else {
-            // Elevate priority so the browser fetches it sooner
-            try {
-              (target as HTMLImageElement).loading = "eager";
-            } catch {
-              // read-only in some browsers — ignore
-            }
-            target.addEventListener(
-              "load",
-              () => activateInstant(startIndex),
-              { once: true },
-            );
-          }
-        }
-
-        // Respect users who prefer reduced motion — keep the initial image
-        // but skip the automatic rotation/fade.
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          return;
-        }
-
-        // Rotate through slides every 25 seconds with a soft fade
-        setInterval(() => {
-          const prev = current;
-          current = (current + 1) % count;
-          slides[prev].classList.remove("is-active");
-          slides[current].classList.add("is-active");
-        }, 25_000);
+        // Pick one random image and inject it — no carousel, no rotation
+        const { src, alt } = images[Math.floor(Math.random() * images.length)];
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = alt;
+        img.className = "hero-image";
+        img.loading = "eager";
+        img.decoding = "sync";
+        backdrop.appendChild(img);
       })();
     </script>
   )
 }
 
 <style>
-  /* ---- Hero container ---- */
+  /* ---- Hero container — 16:9 horizontal banner, max 768px wide ---- */
   .hero {
     position: relative;
-    min-height: 100vh;
-    min-height: 100svh;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     /* Fallback background when no images are present */
     background-color: var(--color-blue-800);
   }
 
-  /* ---- Background image carousel ---- */
+  /* ---- Background image ---- */
   .hero-backdrop {
     position: absolute;
     inset: 0;
   }
 
-  .hero-slide {
-    position: absolute;
-    inset: 0;
+  .hero-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0;
-    transition: opacity 800ms ease;
-  }
-
-  .hero-slide.is-active {
-    opacity: 1;
+    display: block;
   }
 
   /* ---- Gradient overlay — ensures legible text over any image ---- */
@@ -221,14 +149,17 @@ const remainingImagesJson = JSON.stringify(heroImages.slice(1));
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--space-20) var(--space-8);
+    padding: var(--space-8) var(--space-6);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 
   .hero-headline {
-    font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl));
+    font-size: clamp(var(--text-xl), 5vw, var(--text-4xl));
     color: var(--color-white);
     line-height: var(--leading-tight);
     letter-spacing: var(--tracking-tight);
@@ -236,9 +167,9 @@ const remainingImagesJson = JSON.stringify(heroImages.slice(1));
   }
 
   .hero-subheadline {
-    margin: var(--space-6) auto 0;
-    max-width: 58ch;
-    font-size: clamp(var(--text-base), 2.5vw, var(--text-xl));
+    margin: var(--space-3) auto 0;
+    max-width: 52ch;
+    font-size: clamp(var(--text-sm), 2vw, var(--text-base));
     color: var(--color-blue-50);
     line-height: var(--leading-relaxed);
     text-shadow: 0 1px 4px rgb(0 0 0 / 0.5);
@@ -249,17 +180,17 @@ const remainingImagesJson = JSON.stringify(heroImages.slice(1));
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--space-4);
-    margin-top: var(--space-10);
+    gap: var(--space-3);
+    margin-top: var(--space-6);
   }
 
   .hero-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-4) var(--space-8);
+    padding: var(--space-3) var(--space-6);
     font-family: var(--font-body);
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--tracking-wide);
     text-decoration: none;
@@ -304,7 +235,7 @@ const remainingImagesJson = JSON.stringify(heroImages.slice(1));
   /* ---- Responsive adjustments ---- */
   @media (max-width: 640px) {
     .hero-content {
-      padding: var(--space-16) var(--space-6);
+      padding: var(--space-4) var(--space-4);
     }
 
     .hero-ctas {
@@ -314,7 +245,7 @@ const remainingImagesJson = JSON.stringify(heroImages.slice(1));
 
     .hero-btn {
       width: 100%;
-      max-width: 320px;
+      max-width: 240px;
     }
   }
 </style>
