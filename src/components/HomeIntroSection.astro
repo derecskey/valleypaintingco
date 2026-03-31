@@ -1,0 +1,113 @@
+---
+// No props — content is static per the issue spec.
+---
+
+<section class="intro-section" aria-labelledby="intro-heading">
+  <div class="intro-container">
+
+    <!-- Company overview -->
+    <div class="intro-content">
+      <h2 id="intro-heading">Northeast Ohio&rsquo;s Trusted Painting Professionals</h2>
+      <p>
+        Established in 1984 and based out of Chagrin Falls, Ohio, Valley Painting
+        has been servicing the Chagrin Valley and surrounding areas with one thing
+        in mind: to complete a quality job at a fair price using our years of
+        experience and the best quality materials.
+      </p>
+      <p>
+        We change as the market and the products change. We adapt to better ways of
+        doing our job as well as constantly learning and informing our clients about
+        the process, new technologies, and products. We have adjusted to the new EPA
+        Low VOC rules and regulations regarding oil-based materials.
+      </p>
+      <p>
+        We are also trained and certified in the EPA&rsquo;s new regulations
+        regarding lead-based paint.
+      </p>
+    </div>
+
+    <!-- Eco-friendly callout -->
+    <aside class="green-callout" aria-label="Eco-friendly practices">
+      <div class="green-callout-icon" aria-hidden="true">🌿</div>
+      <h3 class="green-callout-heading">We Go Green!</h3>
+      <p>
+        We use Low VOC Materials when requested or spec&rsquo;d. We practice smart
+        recycling techniques to reduce waste that is often associated with
+        contracting projects, which in turn benefits our environment.
+      </p>
+      <p>Valley Painting is an Eco-Friendly painting company.</p>
+    </aside>
+
+  </div>
+</section>
+
+<style>
+  /* ---- Section wrapper ---- */
+  .intro-section {
+    background-color: var(--color-surface);
+    padding: var(--space-16) var(--space-8);
+  }
+
+  .intro-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  /* ---- Overview copy ---- */
+  .intro-content h2 {
+    font-size: clamp(var(--text-2xl), 3.5vw, var(--text-4xl));
+    color: var(--color-heading);
+    margin-bottom: var(--space-6);
+  }
+
+  .intro-content p {
+    color: var(--color-text);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    max-width: 65ch;
+  }
+
+  /* ---- Green callout card ---- */
+  .green-callout {
+    background-color: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-top: 4px solid #3a8f5c; /* eco-green accent independent of theme tokens */
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+  }
+
+  .green-callout-icon {
+    font-size: var(--text-4xl);
+    line-height: 1;
+    margin-bottom: var(--space-4);
+  }
+
+  .green-callout-heading {
+    font-size: var(--text-2xl);
+    color: var(--color-heading);
+    margin-bottom: var(--space-4);
+  }
+
+  .green-callout p {
+    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    max-width: 100%;
+  }
+
+  /* ---- Responsive: single column on narrow viewports ---- */
+  @media (max-width: 768px) {
+    .intro-section {
+      padding: var(--space-12) var(--space-6);
+    }
+
+    .intro-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
