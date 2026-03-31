@@ -240,12 +240,12 @@
     cursor: pointer;
     padding: var(--space-2);
     border-radius: var(--radius-md);
-    color: var(--color-white);
+    color: var(--color-header-text);
     line-height: 1;
   }
 
   .theme-picker-btn:hover {
-    background-color: rgb(255 255 255 / 0.12);
+    background-color: var(--color-header-control-hover);
   }
 
   .theme-picker-btn:focus-visible {
@@ -263,12 +263,12 @@
     list-style: none;
     margin: 0;
     padding: var(--space-2) 0;
-    background-color: var(--color-white);
-    color: var(--color-neutral-900);
-    border: 1px solid var(--color-neutral-200);
+    background-color: var(--color-theme-menu-bg);
+    color: var(--color-theme-menu-text);
+    border: 1px solid var(--color-theme-menu-border);
     border-radius: var(--radius-lg);
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15),
-      0 4px 6px -2px rgb(0 0 0 / 0.08);
+    box-shadow: 0 10px 15px -3px var(--color-theme-menu-shadow-1),
+      0 4px 6px -2px var(--color-theme-menu-shadow-2);
   }
 
   /* Individual option row */
@@ -286,12 +286,12 @@
 
   .theme-option:hover,
   .theme-option:focus {
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-theme-option-hover-bg);
     outline: none;
   }
 
   .theme-option:focus-visible {
-    outline: 2px solid var(--color-blue-600);
+    outline: 2px solid var(--color-theme-option-focus);
     outline-offset: -2px;
     border-radius: var(--radius-sm);
   }
@@ -301,7 +301,7 @@
     margin-left: auto;
     display: flex;
     align-items: center;
-    color: var(--color-blue-600);
+    color: var(--color-theme-option-check);
     opacity: 0;
   }
 
@@ -321,7 +321,7 @@
     height: 1rem;
     border-radius: var(--radius-full);
     flex-shrink: 0;
-    border: 1px solid rgb(0 0 0 / 0.15);
+    border: 1px solid var(--color-theme-swatch-border);
   }
 
   .swatch--blue {

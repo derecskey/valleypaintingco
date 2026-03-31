@@ -152,6 +152,35 @@
   --color-header-bg:   var(--color-blue-800);
   --color-footer-bg:   var(--color-blue-900);
   --color-nav-bg:      var(--color-blue-900);
+
+  /* Header foreground palette */
+  --color-header-text:          var(--color-white);
+  --color-header-control-hover: rgb(255 255 255 / 0.12);
+  --color-header-link:          var(--color-white);
+  --color-header-link-hover-bg: rgb(255 255 255 / 0.12);
+  --color-header-link-hover:    var(--color-white);
+  --color-header-mobile-divider: rgb(255 255 255 / 0.08);
+
+  /* Footer foreground palette */
+  --color-footer-text:        var(--color-blue-100);
+  --color-footer-heading:     var(--color-white);
+  --color-footer-muted:       var(--color-blue-200);
+  --color-footer-label:       var(--color-blue-300);
+  --color-footer-link:        var(--color-blue-100);
+  --color-footer-link-hover:  var(--color-white);
+  --color-footer-bottom-text: var(--color-blue-300);
+  --color-footer-divider:     rgb(255 255 255 / 0.1);
+
+  /* Theme picker menu palette */
+  --color-theme-menu-bg:          var(--color-white);
+  --color-theme-menu-text:        var(--color-neutral-900);
+  --color-theme-menu-border:      var(--color-neutral-200);
+  --color-theme-menu-shadow-1:    rgb(0 0 0 / 0.15);
+  --color-theme-menu-shadow-2:    rgb(0 0 0 / 0.08);
+  --color-theme-option-hover-bg:  var(--color-neutral-100);
+  --color-theme-option-focus:     var(--color-blue-600);
+  --color-theme-option-check:     var(--color-blue-600);
+  --color-theme-swatch-border:    rgb(0 0 0 / 0.15);
 }
 
 /* ==========================================================================
@@ -178,6 +207,35 @@
   --color-header-bg:   var(--color-blue-600);
   --color-footer-bg:   var(--color-blue-600);
   --color-nav-bg:      var(--color-blue-700);
+
+  /* Header foreground palette */
+  --color-header-text:          var(--color-white);
+  --color-header-control-hover: rgb(255 255 255 / 0.12);
+  --color-header-link:          var(--color-white);
+  --color-header-link-hover-bg: rgb(255 255 255 / 0.12);
+  --color-header-link-hover:    var(--color-white);
+  --color-header-mobile-divider: rgb(255 255 255 / 0.08);
+
+  /* Footer foreground palette */
+  --color-footer-text:        var(--color-blue-100);
+  --color-footer-heading:     var(--color-white);
+  --color-footer-muted:       var(--color-blue-200);
+  --color-footer-label:       var(--color-blue-300);
+  --color-footer-link:        var(--color-blue-100);
+  --color-footer-link-hover:  var(--color-white);
+  --color-footer-bottom-text: var(--color-blue-300);
+  --color-footer-divider:     rgb(255 255 255 / 0.1);
+
+  /* Theme picker menu palette */
+  --color-theme-menu-bg:          var(--color-white);
+  --color-theme-menu-text:        var(--color-neutral-900);
+  --color-theme-menu-border:      var(--color-neutral-200);
+  --color-theme-menu-shadow-1:    rgb(0 0 0 / 0.15);
+  --color-theme-menu-shadow-2:    rgb(0 0 0 / 0.08);
+  --color-theme-option-hover-bg:  var(--color-neutral-100);
+  --color-theme-option-focus:     var(--color-blue-600);
+  --color-theme-option-check:     var(--color-blue-600);
+  --color-theme-swatch-border:    rgb(0 0 0 / 0.15);
 }
 
 /* ==========================================================================
@@ -199,6 +257,40 @@
   --color-border:      rgb(255 255 255 / 0.1);
   --color-accent:      var(--color-gold-300);
   --color-accent-text: var(--color-neutral-900);
+
+  /* Header / footer / mobile-nav background colors */
+  --color-header-bg:   #152337;
+  --color-footer-bg:   #152337;
+  --color-nav-bg:      #1a2b40;
+
+  /* Header foreground palette */
+  --color-header-text:          #f1f5fb;
+  --color-header-control-hover: rgb(241 245 251 / 0.14);
+  --color-header-link:          #f1f5fb;
+  --color-header-link-hover-bg: rgb(241 245 251 / 0.14);
+  --color-header-link-hover:    #f1f5fb;
+  --color-header-mobile-divider: rgb(241 245 251 / 0.12);
+
+  /* Footer foreground palette */
+  --color-footer-text:        #c7d4e5;
+  --color-footer-heading:     #f1f5fb;
+  --color-footer-muted:       #9fb2c9;
+  --color-footer-label:       #89a0bd;
+  --color-footer-link:        #c7d4e5;
+  --color-footer-link-hover:  #f1f5fb;
+  --color-footer-bottom-text: #89a0bd;
+  --color-footer-divider:     rgb(255 255 255 / 0.14);
+
+  /* Theme picker menu palette */
+  --color-theme-menu-bg:          #1f3350;
+  --color-theme-menu-text:        #e2e8f0;
+  --color-theme-menu-border:      #2f4766;
+  --color-theme-menu-shadow-1:    rgb(0 0 0 / 0.35);
+  --color-theme-menu-shadow-2:    rgb(0 0 0 / 0.2);
+  --color-theme-option-hover-bg:  #2a4262;
+  --color-theme-option-focus:     #6aaede;
+  --color-theme-option-check:     #6aaede;
+  --color-theme-swatch-border:    rgb(255 255 255 / 0.2);
 }
 
 /* ==========================================================================
@@ -221,6 +313,40 @@
   --color-border:      #ddd8d0;
   --color-accent:      #bf8275;   /* SW 9699 Stone Fruit */
   --color-accent-text: #ffffff;
+
+  /* Header / footer / mobile-nav use Autonomous SW 9557 */
+  --color-header-bg:   #7b8b9e;
+  --color-footer-bg:   #7b8b9e;
+  --color-nav-bg:      #7b8b9e;
+
+  /* Header foreground palette uses Night Out SW 9560 */
+  --color-header-text:          #1c2636;
+  --color-header-control-hover: rgb(28 38 54 / 0.12);
+  --color-header-link:          #1c2636;
+  --color-header-link-hover-bg: rgb(28 38 54 / 0.12);
+  --color-header-link-hover:    #1c2636;
+  --color-header-mobile-divider: rgb(28 38 54 / 0.18);
+
+  /* Footer foreground palette uses Night Out SW 9560 */
+  --color-footer-text:        #1c2636;
+  --color-footer-heading:     #1c2636;
+  --color-footer-muted:       #1c2636;
+  --color-footer-label:       #1c2636;
+  --color-footer-link:        #1c2636;
+  --color-footer-link-hover:  #1c2636;
+  --color-footer-bottom-text: #1c2636;
+  --color-footer-divider:     rgb(28 38 54 / 0.22);
+
+  /* Theme picker menu palette */
+  --color-theme-menu-bg:          #ffffff;
+  --color-theme-menu-text:        #1c2636;
+  --color-theme-menu-border:      #ddd8d0;
+  --color-theme-menu-shadow-1:    rgb(0 0 0 / 0.18);
+  --color-theme-menu-shadow-2:    rgb(0 0 0 / 0.1);
+  --color-theme-option-hover-bg:  #f7f3ee;
+  --color-theme-option-focus:     #1c2636;
+  --color-theme-option-check:     #1c2636;
+  --color-theme-swatch-border:    rgb(28 38 54 / 0.2);
 }
 
 /* ==========================================================================
