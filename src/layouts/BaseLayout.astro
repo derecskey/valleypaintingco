@@ -21,6 +21,20 @@ const {
 <!doctype html>
 <html lang="en" data-theme={theme}>
   <head>
+    <!--
+      Anti-FOUC: apply the saved theme token before any CSS paints the page.
+      Using is:inline so Astro does not bundle/defer this script.
+    -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem("vp-theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (_) {}
+      })();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
