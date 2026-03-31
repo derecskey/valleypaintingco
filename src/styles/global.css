@@ -1,0 +1,337 @@
+/* ==========================================================================
+   VALLEY PAINTING COMPANY — Global Stylesheet
+   ==========================================================================
+   Defines the design system: color palette, typography, spacing, and base
+   styles for all three themes:
+     • Blue  (default) — brand identity: white on cobalt blue
+     • Light            — elegant, warm off-white with blue accents
+     • Dark             — sophisticated deep-navy with blue accents
+   ========================================================================== */
+
+/* ==========================================================================
+   COLOR PALETTE — Raw Brand Colors
+   These primitives are shared across all themes. Semantic theme tokens
+   (--color-bg, --color-text, etc.) are defined per-theme below.
+   ========================================================================== */
+:root {
+  /* Primary blue — Toyota FJ Cruiser cobalt, Valley Painting Company brand */
+  --color-blue-900: #002b52;
+  --color-blue-800: #003a73;
+  --color-blue-700: #004e99;
+  --color-blue-600: #005bac; /* ← Primary brand blue */
+  --color-blue-500: #0068ba;
+  --color-blue-400: #2e85cc;
+  --color-blue-300: #6aaede;
+  --color-blue-200: #a8ceed;
+  --color-blue-100: #c8dff5; /* muted text on blue-600: ~5.3:1 contrast ✓ */
+  --color-blue-50:  #ebf4fb;
+
+  /* Accent gold — warmth and quality, pairs with blue */
+  --color-gold-600: #9e7210;
+  --color-gold-500: #c48f14;
+  --color-gold-400: #d9a820;
+  --color-gold-300: #ecbf40;
+
+  /* Neutral scale */
+  --color-neutral-950: #0a0a0a;
+  --color-neutral-900: #171717;
+  --color-neutral-800: #262626;
+  --color-neutral-700: #404040;
+  --color-neutral-600: #525252;
+  --color-neutral-500: #737373;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-50:  #fafafa;
+  --color-white:       #ffffff;
+  --color-black:       #000000;
+
+  /* ==========================================================================
+     TYPOGRAPHY
+     ========================================================================== */
+
+  /* Typefaces
+     • Playfair Display: elegant serif for headings — editorial, refined,
+       timeless. Used by luxury and high-end lifestyle brands.
+     • Lato: clean, geometric humanist sans-serif for body — readable,
+       professional, warm. Loaded via <link> in BaseLayout.astro with
+       font-display: swap (via Google Fonts &display=swap parameter).
+  */
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body:    "Lato", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    ui-monospace, "Courier New", Courier, monospace;
+
+  --font-weight-normal: 400;
+  --font-weight-bold:   700;
+
+  /* Modular type scale (base 16px) */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+  --text-4xl:  2.25rem;   /* 36px */
+  --text-5xl:  3rem;      /* 48px */
+  --text-6xl:  3.75rem;   /* 60px */
+
+  --leading-tight:   1.25;
+  --leading-snug:    1.375;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.625;
+
+  --tracking-tight:   -0.025em;
+  --tracking-normal:   0em;
+  --tracking-wide:     0.025em;
+  --tracking-wider:    0.05em;
+  --tracking-widest:   0.1em;
+
+  /* ==========================================================================
+     SPACING
+     ========================================================================== */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ==========================================================================
+     BORDER RADIUS
+     ========================================================================== */
+  --radius-sm:   0.125rem;
+  --radius-md:   0.375rem;
+  --radius-lg:   0.5rem;
+  --radius-xl:   0.75rem;
+  --radius-2xl:  1rem;
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     SHADOWS
+     ========================================================================== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+
+  /* ==========================================================================
+     TRANSITIONS
+     ========================================================================== */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ==========================================================================
+     DEFAULT THEME: Brand Blue
+     Valley Painting Company core identity — white text on cobalt blue.
+     Contrast: white (#fff) on blue-600 (#005bac) ≈ 6.7:1  ✓ WCAG AA
+               blue-100 (#c8dff5) on blue-600        ≈ 5.3:1  ✓ WCAG AA
+     ========================================================================== */
+  --color-bg:          var(--color-blue-600);
+  --color-bg-alt:      var(--color-blue-700);
+  --color-surface:     var(--color-blue-700);
+  --color-surface-alt: var(--color-blue-800);
+  --color-text:        var(--color-white);
+  --color-text-muted:  var(--color-blue-100);
+  --color-heading:     var(--color-white);
+  --color-link:        var(--color-white);
+  --color-link-hover:  var(--color-blue-100);
+  --color-border:      rgb(255 255 255 / 0.2);
+  --color-accent:      var(--color-gold-400);
+  --color-accent-text: var(--color-neutral-900);
+}
+
+/* ==========================================================================
+   LIGHT THEME — Elegant, warm, clean
+   Contrast: neutral-900 (#171717) on #f8f6f3 ≈ 18:1    ✓ WCAG AA
+             neutral-600 (#525252) on #f8f6f3 ≈  6.8:1  ✓ WCAG AA
+             blue-600    (#005bac) on #f8f6f3 ≈  6.1:1  ✓ WCAG AA
+   ========================================================================== */
+[data-theme="light"] {
+  --color-bg:          #f8f6f3;
+  --color-bg-alt:      #edeae5;
+  --color-surface:     var(--color-white);
+  --color-surface-alt: #f2efea;
+  --color-text:        var(--color-neutral-900);
+  --color-text-muted:  var(--color-neutral-600);
+  --color-heading:     var(--color-neutral-950);
+  --color-link:        var(--color-blue-600);
+  --color-link-hover:  var(--color-blue-700);
+  --color-border:      var(--color-neutral-200);
+  --color-accent:      var(--color-gold-500);
+  --color-accent-text: var(--color-white);
+}
+
+/* ==========================================================================
+   DARK THEME — Sophisticated deep navy
+   Contrast: #e2e8f0 on #0d1b2a ≈ 15.4:1  ✓ WCAG AA
+             #94a3b8 on #0d1b2a ≈  7.4:1  ✓ WCAG AA
+             blue-300 (#6aaede) on #0d1b2a ≈  7.0:1  ✓ WCAG AA
+   ========================================================================== */
+[data-theme="dark"] {
+  --color-bg:          #0d1b2a;
+  --color-bg-alt:      #152337;
+  --color-surface:     #1a2b40;
+  --color-surface-alt: #1f3350;
+  --color-text:        #e2e8f0;
+  --color-text-muted:  #94a3b8;
+  --color-heading:     #f1f5fb;
+  --color-link:        var(--color-blue-300);
+  --color-link-hover:  var(--color-blue-200);
+  --color-border:      rgb(255 255 255 / 0.1);
+  --color-accent:      var(--color-gold-300);
+  --color-accent-text: var(--color-neutral-900);
+}
+
+/* ==========================================================================
+   CSS RESET & BASE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY — Headings
+   ========================================================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-heading);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-4xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+/* ==========================================================================
+   TYPOGRAPHY — Body & Inline
+   ========================================================================== */
+p {
+  line-height: var(--leading-relaxed);
+  max-width: 70ch;
+}
+
+p + p {
+  margin-top: var(--space-4);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color var(--transition-fast);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-link-hover);
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+strong,
+b {
+  font-weight: var(--font-weight-bold);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY — Lists
+   ========================================================================== */
+ul,
+ol {
+  padding-left: var(--space-6);
+  line-height: var(--leading-relaxed);
+}
+
+li + li {
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   MEDIA
+   ========================================================================== */
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   FORMS
+   ========================================================================== */
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+}
+
+/* ==========================================================================
+   FOCUS — Accessible keyboard navigation
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}

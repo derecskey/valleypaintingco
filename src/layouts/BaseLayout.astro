@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  theme?: "blue" | "light" | "dark";
+}
+
+const {
+  title,
+  description = "Valley Painting Company — Northeast Ohio's trusted residential and commercial painters.",
+  theme,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+
+    <!--
+      Google Fonts — loaded with font-display: swap via &display=swap parameter.
+      Preconnect hints allow parallel DNS + TLS negotiation before the
+      stylesheet request fires, reducing font render-blocking time.
+      • Playfair Display: elegant serif for headings (weights 400, 700; italic 400)
+      • Lato: clean humanist sans-serif for body copy (weights 400, 700)
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
