@@ -8,7 +8,7 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
-  theme?: "blue" | "light" | "dark" | "white-snow" | "rain-cloud";
+  theme?: "blue" | "light" | "dark" | "white-snow" | "rain-cloud" | "silhouette";
 }
 
 const {
@@ -30,7 +30,7 @@ const {
       (function () {
         try {
           var t = localStorage.getItem("vp-theme");
-          if (t === "light" || t === "dark" || t === "white-snow" || t === "rain-cloud") {
+          if (t === "light" || t === "dark" || t === "white-snow" || t === "rain-cloud" || t === "silhouette") {
             document.documentElement.setAttribute("data-theme", t);
           }
         } catch (_) {}

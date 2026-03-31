@@ -2,12 +2,13 @@
    VALLEY PAINTING COMPANY — Global Stylesheet
    ==========================================================================
    Defines the design system: color palette, typography, spacing, and base
-   styles for all five themes:
+   styles for all six themes:
      • Blue        (default) — brand identity: white on cobalt blue
      • Light                  — elegant, warm off-white with blue accents
      • Dark                   — sophisticated deep-navy with blue accents
      • White Snow (SW 9541)  — crisp warm white inspired by Sherwin Williams
      • Rain Cloud (SW 9639)  — layered greige + warm neutral Sherwin palette
+     • Silhouette (AF-655)   — Benjamin Moore Affinity palette theme
    ========================================================================== */
 
 /* ==========================================================================
@@ -364,6 +365,64 @@
   /* Hero CTA (Call Now) */
   --color-hero-cta-primary-bg:   var(--color-accent);
   --color-hero-cta-primary-text: #1f2328;
+  --color-hero-cta-primary-border: transparent;
+}
+
+/* ===========================================================================
+   SILHOUETTE THEME — Inspired by Benjamin Moore AF-655 Silhouette
+   Palette: Silhouette AF-655, Fossil AF-65, Pashmina AF-100, Abalone 2108-60
+   ========================================================================== */
+[data-theme="silhouette"] {
+  --color-bg:          #e3ddce;   /* BM AF-65 Fossil */
+  --color-bg-alt:      #d3cfc7;   /* BM 2108-60 Abalone */
+  --color-surface:     #f7f4ef;
+  --color-surface-alt: #ece7de;
+  --color-text:        #57504c;   /* BM AF-655 Silhouette */
+  --color-text-muted:  #8f8679;
+  --color-heading:     #57504c;   /* BM AF-655 Silhouette */
+  --color-link:        #57504c;
+  --color-link-hover:  #403b38;
+  --color-border:      #cfc8be;
+  --color-accent:      #bbb2a1;   /* BM AF-100 Pashmina */
+  --color-accent-text: #403b38;
+
+  /* Header / footer / mobile-nav backgrounds */
+  --color-header-bg:   #57504c;   /* BM AF-655 Silhouette */
+  --color-footer-bg:   #d3cfc7;   /* BM 2108-60 Abalone */
+  --color-nav-bg:      #57504c;   /* BM AF-655 Silhouette */
+
+  /* Header foreground palette */
+  --color-header-text:          #e3ddce; /* BM AF-65 Fossil */
+  --color-header-control-hover: rgb(227 221 206 / 0.16);
+  --color-header-link:          #e3ddce;
+  --color-header-link-hover-bg: rgb(227 221 206 / 0.16);
+  --color-header-link-hover:    #ffffff;
+  --color-header-mobile-divider: rgb(227 221 206 / 0.2);
+
+  /* Footer foreground palette */
+  --color-footer-text:        #57504c;
+  --color-footer-heading:     #57504c;
+  --color-footer-muted:       #57504c;
+  --color-footer-label:       #57504c;
+  --color-footer-link:        #57504c;
+  --color-footer-link-hover:  #403b38;
+  --color-footer-bottom-text: #57504c;
+  --color-footer-divider:     rgb(87 80 76 / 0.28);
+
+  /* Theme picker menu palette */
+  --color-theme-menu-bg:          #ffffff;
+  --color-theme-menu-text:        #57504c;
+  --color-theme-menu-border:      #cfc8be;
+  --color-theme-menu-shadow-1:    rgb(0 0 0 / 0.15);
+  --color-theme-menu-shadow-2:    rgb(0 0 0 / 0.08);
+  --color-theme-option-hover-bg:  #f7f4ef;
+  --color-theme-option-focus:     #57504c;
+  --color-theme-option-check:     #57504c;
+  --color-theme-swatch-border:    rgb(87 80 76 / 0.2);
+
+  /* Hero CTA (Call Now) */
+  --color-hero-cta-primary-bg:   var(--color-accent);
+  --color-hero-cta-primary-text: #403b38;
   --color-hero-cta-primary-border: transparent;
 }
 
