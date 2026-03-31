@@ -61,6 +61,8 @@ const navLinks = [
     function openNav() {
       toggle.setAttribute("aria-expanded", "true");
       nav.classList.add("is-open");
+      // Move focus to the first nav link so keyboard users can navigate immediately
+      nav.querySelector<HTMLAnchorElement>("a")?.focus();
     }
 
     function closeNav(returnFocus = false) {
@@ -250,14 +252,16 @@ const navLinks = [
       background-color: var(--color-blue-900);
       border-top: 1px solid var(--color-border);
       box-shadow: var(--shadow-lg);
-      /* Hidden state — slide up 6px (subtle reveal distance) and fade out */
+      /* Hidden state — slide up 6px (subtle reveal distance) and fade out.
+         visibility uses a 0s duration with a delay equal to the transition so it
+         hides only after opacity/transform finish, avoiding a mid-fade a11y gap. */
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
       transform: translateY(-6px);
       transition:
         opacity var(--transition-base),
-        visibility var(--transition-base),
+        visibility 0s linear var(--transition-base),
         transform var(--transition-base);
     }
 
@@ -266,6 +270,11 @@ const navLinks = [
       visibility: visible;
       pointer-events: auto;
       transform: translateY(0);
+      /* Remove the visibility delay so it becomes visible immediately on open */
+      transition:
+        opacity var(--transition-base),
+        visibility 0s linear,
+        transform var(--transition-base);
     }
 
     /* No-JS fallback: nav is always visible, stacked vertically */
@@ -309,7 +318,10 @@ const navLinks = [
   @media (prefers-reduced-motion: reduce) {
     .js-enabled .primary-nav {
       transform: none;
-      transition: opacity var(--transition-base), visibility var(--transition-base);
+      transition: opacity var(--transition-base), visibility 0s linear var(--transition-base);
+    }
+    .js-enabled .primary-nav.is-open {
+      transition: opacity var(--transition-base), visibility 0s linear;
     }
   }
 </style>
