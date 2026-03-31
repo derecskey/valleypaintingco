@@ -104,15 +104,14 @@ const heroImagesJson = JSON.stringify(heroImages);
 }
 
 <style>
-  /* ---- Hero container — 16:9 horizontal banner, max 768px wide ---- */
+  /* ---- Hero container — 16:9 horizontal banner, max 768px tall ---- */
   .hero {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 768px;
-    margin: 0 auto;
+    max-height: 768px;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     /* Fallback background when no images are present */
