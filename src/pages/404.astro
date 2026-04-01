@@ -4,19 +4,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title="Page Not Found | Valley Painting Company" description="Sorry, we couldn't find that page." theme="blue">
   <section class="not-found" style="text-align:center; padding: var(--space-6) 0;">
-    <img src="/images/Tipped-paint-bucket-fade.png" alt="Tipped paint bucket" style="max-width:320px; width:100%; margin:0 auto 2rem; display:block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));" loading="lazy" />
-    <h1 style="font-size:2.5rem; margin-bottom:1rem; font-family:var(--font-heading); color:var(--color-primary);">Oops! Page Not Found</h1>
-    <p style="font-size:1.25rem; margin-bottom:2rem; color:var(--color-text);">
-      Sorry, the page you’re looking for doesn’t exist.<br />
-      But your next great paint job is just a click away.
+    <img src={(import.meta.env.BASE_URL || '') + 'images/Tipped-paint-bucket-fade.png'} alt="Tipped paint bucket" style="max-width:320px; width:100%; margin:0 auto 2rem; display:block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));" loading="lazy" />
+    <p style="font-size:1.25rem; margin-bottom:2rem; color:var(--color-text); text-align:center;">
+      Sorry, the page you’re looking for doesn’t exist.
     </p>
-    <nav aria-label="404 page navigation">
-      <ul style="list-style:none; padding:0; display:flex; justify-content:center; gap:var(--space-4); flex-wrap:wrap;">
-        <li><a href="/" class="not-found-link">Home</a></li>
-        <li><a href="/services" class="not-found-link">Services</a></li>
-        <li><a href="/estimate" class="not-found-link">Request an Estimate</a></li>
-      </ul>
-    </nav>
   </section>
   <style>
     .not-found-link {
