@@ -19,14 +19,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <div class="estimate-layout">
 
       <!--
-        Form submission: handled entirely client-side via mailto:.
-        JavaScript intercepts the submit event, assembles a formatted email
-        body from the field values, then sets window.location.href to a
-        mailto: URI — which opens the user's native email client pre-filled.
+        Form submission: handled entirely client-side via sms:.
+        JavaScript intercepts the submit event, assembles a formatted message
+        body from the field values, then sets window.location.href to an
+        sms: URI — which opens the user's native messaging app pre-filled.
         After a short delay the browser navigates to /estimate/thank-you.
 
-        No-JS fallback: the form's action="mailto:..." means browsers that
-        support it will open the email client directly when JS is unavailable.
+        No-JS fallback: the form's action="sms:..." will open the messaging
+        app on mobile devices when JS is unavailable (body won't be pre-filled).
       -->
       <section class="form-section" aria-labelledby="form-heading">
         <h2 id="form-heading" class="visually-hidden">Estimate request form</h2>
@@ -34,9 +34,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <form
           id="estimate-form"
           class="estimate-form"
-          method="POST"
-          action="mailto:dan@chagrinvalleypainting.com"
-          enctype="text/plain"
+          action="sms:+12163195977"
         >
           <!--
             Honeypot anti-spam field.
@@ -249,28 +247,28 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       const service = serviceEl.value;
       const message = messageEl.value.trim();
 
-      // Build a readable email body.
+      // Build a concise SMS body.
       const bodyLines: string[] = [
+        "New Estimate Request — Valley Painting Co.",
         `Name: ${name}`,
         `Email: ${email}`,
       ];
       if (phone) bodyLines.push(`Phone: ${phone}`);
-      bodyLines.push(`Service: ${service}`, "", "Project Description:", message);
+      bodyLines.push(`Service: ${service}`, `Details: ${message}`);
 
-      const to      = "dan@chagrinvalleypainting.com";
-      const subject = encodeURIComponent("New Estimate Request — Valley Painting Company");
-      const body    = encodeURIComponent(bodyLines.join("\n"));
+      const number = "+12163195977";
+      const body   = encodeURIComponent(bodyLines.join("\n"));
 
-      // Open the email client with the pre-filled message.
-      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      // Open the messaging app with the pre-filled message.
+      window.location.href = `sms:${number}?body=${body}`;
 
-      // Wait briefly so the email client has time to launch before the page
+      // Wait briefly so the messaging app has time to launch before the page
       // navigates away. 400ms is long enough on most OS/browser combinations
       // without feeling sluggish to the user.
-      const EMAIL_CLIENT_LAUNCH_DELAY = 400;
+      const MESSAGING_APP_LAUNCH_DELAY = 400;
       setTimeout(() => {
-        window.location.href = "/estimate/thank-you";
-      }, EMAIL_CLIENT_LAUNCH_DELAY);
+        window.location.href = `${import.meta.env.BASE_URL}estimate/thank-you`;
+      }, MESSAGING_APP_LAUNCH_DELAY);
     });
   }
 </script>
