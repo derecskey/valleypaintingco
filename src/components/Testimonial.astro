@@ -116,6 +116,11 @@ const { quote, attribution, detail, variant = "default" } = Astro.props;
     color: var(--color-blue-200);
   }
 
+.platform-links a {
+  display: block;       /* was: inline-block */
+  padding: var(--space-3) var(--space-6);
+}
+
   /* ---- Responsive ---- */
   @media (max-width: 600px) {
     .testimonial--default {
@@ -123,3 +128,5 @@ const { quote, attribution, detail, variant = "default" } = Astro.props;
     }
   }
 </style>
+
+
