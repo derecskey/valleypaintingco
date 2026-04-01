@@ -4,13 +4,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Send Your Estimate Request | Valley Painting Company"
-  description="Your estimate request has been prepared. Open your email client and click Send to complete the request."
+  description="Your estimate request has been prepared. Open your SMS client and tap Send to complete the request."
 >
   <article class="thankyou-page">
 
     <div class="thankyou-card">
 
-      <!-- Envelope / send icon -->
+      <!-- SMS / chat bubble icon -->
       <div class="icon-wrapper" aria-hidden="true">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -24,14 +24,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           stroke-linejoin="round"
           focusable="false"
         >
-          <rect width="20" height="16" x="2" y="4" rx="2"/>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
       </div>
 
       <h1>Almost There!</h1>
       <p class="lead">
-        Your estimate request is ready. Your email client should have opened
+        Your estimate request is ready. Your SMS client should have opened
         with everything pre-filled — just hit <em>Send</em> to submit
         your request.
       </p>
@@ -39,16 +38,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <section class="what-next" aria-labelledby="what-next-heading">
         <h2 id="what-next-heading">What happens after you send?</h2>
         <ol class="steps-list">
-          <li>We receive your request directly in our inbox.</li>
+          <li>We receive your request directly to our mobile phone.</li>
           <li>We'll reach out by phone or email to schedule a walkthrough.</li>
           <li>You'll receive a written estimate at no charge.</li>
         </ol>
       </section>
 
       <p class="direct-contact">
-        Email client didn't open? Email us directly at
-        <a href="mailto:dan@chagrinvalleypainting.com">dan@chagrinvalleypainting.com</a>
-        or call <a href="tel:+12163195977">216-319-5977</a>.
+        SMS client didn't open? Text or call us directly at
+        <a href="sms:+12163195977">216-319-5977</a>.
       </p>
 
       <nav class="thankyou-nav" aria-label="Continue browsing">

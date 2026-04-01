@@ -89,21 +89,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               />
             </div>
 
-            <!-- Phone -->
-            <div class="form-field">
-              <label class="form-label" for="phone">
-                Phone Number
-                <span class="optional-label">(optional)</span>
-              </label>
-              <input
-                class="form-input"
-                type="tel"
-                id="phone"
-                name="phone"
-                autocomplete="tel"
-              />
-            </div>
-
             <!-- Service Type -->
             <div class="form-field">
               <label class="form-label" for="service">
@@ -233,17 +218,15 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       // Collect field values — guard against unexpected DOM changes.
       const nameEl    = form.querySelector<HTMLInputElement>("#name");
       const emailEl   = form.querySelector<HTMLInputElement>("#email");
-      const phoneEl   = form.querySelector<HTMLInputElement>("#phone");
       const serviceEl = form.querySelector<HTMLSelectElement>("#service");
       const messageEl = form.querySelector<HTMLTextAreaElement>("#message");
 
-      if (!nameEl || !emailEl || !phoneEl || !serviceEl || !messageEl) {
+      if (!nameEl || !emailEl || !serviceEl || !messageEl) {
         return;
       }
 
       const name    = nameEl.value.trim();
       const email   = emailEl.value.trim();
-      const phone   = phoneEl.value.trim();
       const service = serviceEl.value;
       const message = messageEl.value.trim();
 
@@ -253,7 +236,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         `Name: ${name}`,
         `Email: ${email}`,
       ];
-      if (phone) bodyLines.push(`Phone: ${phone}`);
       bodyLines.push(`Service: ${service}`, `Details: ${message}`);
 
       const number = "+12163195977";
